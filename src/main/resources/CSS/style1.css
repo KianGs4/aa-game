@@ -4,6 +4,7 @@
 
 .pane {
     -fx-background-color: #000000;
+
 }
 
 .button-1 {
@@ -42,3 +43,4 @@
     -fx-background-color: #2196f3;
     -fx-text-fill: #ffffff;
 }
+

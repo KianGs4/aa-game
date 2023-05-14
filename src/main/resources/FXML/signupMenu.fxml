@@ -4,13 +4,14 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<?import javafx.scene.control.PasswordField?>
-<VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="480.0" styleClass="blue-panel" stylesheets="@../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="480.0" styleClass="blue-panel" stylesheets="@../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SignupMenuController">
     <children>
         <Label text="Sign Up" textFill="#2196f3">
             <font>
@@ -22,54 +23,86 @@
                 <Insets top="20.0" />
             </VBox.margin>
             <children>
-                <TextField prefHeight="26.0" prefWidth="455.0" promptText="username" styleClass="tf_box" />
+            <VBox prefHeight="42.0" prefWidth="446.0">
+               <children>
+                      <TextField fx:id="username" prefHeight="27.0" prefWidth="399.0" promptText="username" styleClass="tf_box" />
+                  <Text fx:id="usernameError" fill="#dc3838" strokeType="OUTSIDE" strokeWidth="0.0" text="">
+                     <VBox.margin>
+                        <Insets left="7.0" top="3.0" />
+                     </VBox.margin>
+                  </Text>
+               </children>
+            </VBox>
                 <FontAwesomeIcon fill="#d7d7d7" glyphName="USER">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
                <HBox.margin>
-                  <Insets right="10.0" />
+                  <Insets bottom="15.0" right="10.0" />
                </HBox.margin>
-               <font>
-                  <Font size="14.0" />
-               </font></FontAwesomeIcon>
+                </FontAwesomeIcon>
             </children>
         </HBox>
         <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
             <children>
-                <PasswordField prefHeight="26.0" prefWidth="455.0" promptText="password" styleClass="tf_box">
+            <VBox prefHeight="44.0" prefWidth="448.0">
+               <children>
+                      <PasswordField fx:id="password" prefHeight="26.0" prefWidth="164.0" promptText="password" styleClass="tf_box" />
+                  <Text fx:id="passwordError" fill="#dc3838" strokeType="OUTSIDE" strokeWidth="0.0" text="">
+                     <VBox.margin>
+                        <Insets left="7.0" top="3.0" />
+                     </VBox.margin>
+                  </Text>
+               </children>
                <HBox.margin>
-                  <Insets top="20.0" />
+                  <Insets top="15.0" />
                </HBox.margin>
-            </PasswordField>
+            </VBox>
                 <FontAwesomeIcon fill="WHITE" glyphName="LOCK" text="">
-               <HBox.margin>
-                  <Insets right="10.0" />
-               </HBox.margin></FontAwesomeIcon>
+                    <HBox.margin>
+                        <Insets bottom="15.0" right="10.0" />
+                    </HBox.margin>
+                </FontAwesomeIcon>
             </children>
         </HBox>
-      <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
-         <children>
-            <PasswordField prefHeight="26.0" prefWidth="455.0" promptText="password confirmation" styleClass="tf_box">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </PasswordField>
-            <FontAwesomeIcon fill="WHITE" glyphName="LOCK">
-               <HBox.margin>
-                  <Insets right="10.0" />
-               </HBox.margin>
-            </FontAwesomeIcon>
-         </children>
-         <VBox.margin>
-            <Insets top="15.0" />
-         </VBox.margin>
-      </HBox>
-      <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="430.0" styleClass="button-1" text="Sign Up">
+        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
+            <children>
+            <VBox prefHeight="42.0" prefWidth="465.0">
+               <children>
+                      <PasswordField fx:id="passwordConfirmation" prefHeight="26.0" prefWidth="450.0" promptText="password confirmation" styleClass="tf_box" />
+                  <Text fx:id="passwordConfirmationError" fill="#dc3838" strokeType="OUTSIDE" strokeWidth="0.0" text="">
+                     <VBox.margin>
+                        <Insets left="7.0" top="3.0" />
+                     </VBox.margin>
+                  </Text>
+               </children>
+            </VBox>
+                <FontAwesomeIcon fill="WHITE" glyphName="LOCK">
+                    <HBox.margin>
+                        <Insets bottom="20.0" right="10.0" />
+                    </HBox.margin>
+                </FontAwesomeIcon>
+            </children>
+            <VBox.margin>
+                <Insets top="10.0" />
+            </VBox.margin>
+        </HBox>
+        <Button mnemonicParsing="false" onMouseClicked="#signUp" prefHeight="26.0" prefWidth="430.0" styleClass="button-1" text="Sign Up">
+            <font>
+                <Font size="20.0" />
+            </font>
+            <VBox.margin>
+                <Insets top="25.0" />
+            </VBox.margin>
+        </Button>
+      <Text fill="#1ef21e" strokeType="OUTSIDE" strokeWidth="0.0" text="" fx:id="success">
          <font>
-            <Font size="20.0" />
+            <Font size="25.0" />
          </font>
          <VBox.margin>
-            <Insets top="15.0" />
+            <Insets left="24.0" />
          </VBox.margin>
-      </Button>
+      </Text>
     </children>
     <padding>
         <Insets left="20.0" />
