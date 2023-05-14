@@ -26,7 +26,7 @@ public class SignupMenuController {
         checkPasswordError();
         if (haveError()) resetFields();
         else {
-
+            resetFields(username);
             success.setText("Your Account created successfully");
         }
     }
@@ -46,7 +46,7 @@ public class SignupMenuController {
     private void checkPasswordError() {
         if (password.getText().length() < 6) {
             passwordError.setText("Password is week(password must has at least 6 characters)");
-        } else if (password.getText().matches("[\\D]+|[\\d]+|[\\S*\\s+\\S]+")) {
+        } else if (password.getText().matches("[\\D]+|[\\d]+")) {
             passwordError.setText("Password is week(password must include at least 1 character,1 number)");
         } else if (!password.getText().equals(passwordConfirmation.getText())) {
             passwordError.setText("Passwords do not match");
@@ -62,6 +62,13 @@ public class SignupMenuController {
         password.setText("");
         passwordConfirmation.setText("");
     }
+
+    private void resetFields(TextField text) {
+        password.setText("");
+        passwordConfirmation.setText("");
+        text.setText("");
+    }
+
     private void createAccount() {
         User newUser = new User(username.getText(), password.getText());
     }
