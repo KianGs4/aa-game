@@ -7,24 +7,29 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="680.0" prefWidth="980.0" styleClass="parent" stylesheets="@../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LoginMenuController">
+<AnchorPane prefHeight="680.0" prefWidth="980.0" styleClass="parent" stylesheets="@../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainController">
    <children>
-      <Pane layoutX="2.0" layoutY="140.0" prefHeight="400.0" prefWidth="980.0" styleClass="pane">
+      <Pane layoutX="2.0" layoutY="140.0" prefHeight="400.0" prefWidth="980.0" styleClass="pane" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="140.0">
          <children>
             <Label layoutX="37.0" layoutY="108.0" text="Don't have an account?" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Button layoutX="37.0" layoutY="158.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="96.0" styleClass="button-1" text="sign Up" />
+            <Button layoutX="37.0" layoutY="158.0" mnemonicParsing="false" onAction="#openSignUp" prefHeight="46.0" prefWidth="109.0" styleClass="button-1" text="sign Up">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font></Button>
             <Label layoutX="759.0" layoutY="53.0" text="Have an account ?" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Button layoutX="759.0" layoutY="108.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="96.0" styleClass="button-1" text="sign In" />
-            <VBox id="vbox" layoutX="21.0" layoutY="-50.0" prefHeight="480.0" prefWidth="480.0" styleClass="white-pane" />
+            <Button layoutX="759.0" layoutY="108.0" mnemonicParsing="false" onAction="#openSignIn" prefHeight="32.0" prefWidth="96.0" styleClass="button-1" text="sign In">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font></Button>
+            <VBox id="vbox" fx:id="vbox" layoutX="21.0" layoutY="-50.0" prefHeight="480.0" prefWidth="480.0" styleClass="white-pane" />
          </children>
       </Pane>
    </children>

@@ -25,4 +25,5 @@ public class LoginMenuController {
         }
         else  new SignupMenu().start(Main.stage);
     }
+
 }
