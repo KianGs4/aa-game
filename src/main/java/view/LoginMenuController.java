@@ -1,5 +1,6 @@
 package view;
 
+import controller.ProfileController;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -20,14 +21,14 @@ public class LoginMenuController {
     @FXML
     private PasswordField password;
 
-    public void signIn(MouseEvent mouseEvent) {
+    public void signIn(MouseEvent mouseEvent) throws Exception {
         setErrors();
         checkErrors();
         if (haveError()) resetFields();
         else {
             User currentUser = dataBase.getUser(username.getText());
             if(radioButton.isSelected()) UserManager.setLoggedInUser(currentUser);
-            //profile
+            goToProfile(currentUser);
         }
     }
 
@@ -52,12 +53,17 @@ public class LoginMenuController {
         password.setText("");
     }
 
-    public void loginAsGuest(MouseEvent mouseEvent) {
+    public void loginAsGuest(MouseEvent mouseEvent) throws Exception {
         User guest = new User(Utils.generateGuestUsername(dataBase),"@guest" );
         dataBase.addGuest(guest);
         if(radioButton.isSelected()) UserManager.setLoggedInUser(guest);
+        goToProfile(guest);
+    }
 
-        //profile
+    private void goToProfile(User user) throws Exception {
+        ProfileController profileController = new ProfileController(user);
+        ProfileMenuController.setProfileController(profileController);
+        new ProfileMenu().start(Main.stage);
     }
 
 }
