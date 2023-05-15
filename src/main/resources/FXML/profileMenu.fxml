@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="view.ProfileMenuController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="571.0" prefWidth="807.0" styleClass="pane" stylesheets="@../CSS/profileChange.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ProfileMenuController">
+   <children>
+      <Circle fx:id="circle" fill="#0b0b0b" layoutX="126.0" layoutY="115.0" radius="101.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text fill="WHITE" layoutX="249.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="username :">
+         <font>
+            <Font name="Jokerman" size="30.0" />
+         </font>
+      </Text>
+      <Text fx:id="username" fill="WHITE" layoutX="429.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+         <font>
+            <Font name="Jokerman" size="30.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="249.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="password:">
+         <font>
+            <Font name="Jokerman" size="30.0" />
+         </font>
+      </Text>
+      <Text fx:id="password" fill="WHITE" layoutX="429.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+         <font>
+            <Font name="Jokerman" size="30.0" />
+         </font>
+      </Text>
+      <FontAwesomeIcon fill="WHITE" glyphName="EDIT" layoutX="768.0" layoutY="64.0" onMouseClicked="#changeUsername" size="25" />
+      <FontAwesomeIcon fill="WHITE" glyphName="EDIT" layoutX="768.0" layoutY="122.0" size="25" />
+      <TextField fx:id="changeBox" layoutX="142.0" layoutY="483.0" prefHeight="26.0" prefWidth="202.0" promptText="text" styleClass="tf_box" />
+      <Text fx:id="defText" fill="WHITE" layoutX="14.0" layoutY="501.0" strokeType="OUTSIDE" strokeWidth="0.0" text="make your change : " wrappingWidth="174.39999999999998" />
+      <Text fill="WHITE" layoutX="142.0" layoutY="529.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" fx:id="message" />
+   </children>
 </AnchorPane>

@@ -1,9 +1,12 @@
 package model;
 
+import javafx.scene.image.Image;
+
 public class User {
-    private final String password;
-    private final String username;
-    public boolean isGuest = false;
+    private  String password;
+    private  String username;
+    public boolean isGuest;
+    private String avatar;
     private final int  highScore;
 
     public User(String username, String password) {
@@ -11,6 +14,7 @@ public class User {
         this.password = password;
         this.isGuest = false;
         highScore = 0;
+        avatar = "/AVATARS/" + Utils.generateRandomAvatarUrl();
     }
 
     public String getPassword() {
@@ -29,11 +33,27 @@ public class User {
         return highScore;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
     public boolean isGuest() {
         return isGuest;
     }
 
     public void setGuest(boolean guest) {
         isGuest = guest;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

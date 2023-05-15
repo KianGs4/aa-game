@@ -3,16 +3,18 @@ package view;
 import controller.ParentController;
 import javafx.scene.control.Menu;
 import javafx.scene.input.MouseEvent;
+import model.User;
 
 public class PrimaryMenuController {
-    private static ParentController profileController;
+    public static User currentUser;
 
-    public static void setProfileController(ParentController profileController) {
-        profileController = profileController;
+    public static void setProfileController(User user) {
+        currentUser = user;
     }
 
 
     public void goToProfile(MouseEvent mouseEvent) throws Exception {
+
         new ProfileMenu().start(Main.stage);
     }
 

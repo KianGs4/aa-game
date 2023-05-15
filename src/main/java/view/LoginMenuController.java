@@ -62,7 +62,7 @@ public class LoginMenuController {
 
     private void goToProfile(User user) throws Exception {
         ParentController profileController = new ParentController(user);
-        PrimaryMenuController.setProfileController(profileController);
+        PrimaryMenuController.setProfileController(user);
         new PrimaryMenu().start(Main.stage);
     }
 
