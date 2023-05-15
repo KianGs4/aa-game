@@ -5,9 +5,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import model.DataBase;
 import model.User;
 
 public class SignupMenuController {
+    private final DataBase dataBase = DataBase.getInstance();
     public Text usernameError;
     public Text passwordError;
     public Text passwordConfirmationError;
@@ -26,6 +28,7 @@ public class SignupMenuController {
         checkPasswordError();
         if (haveError()) resetFields();
         else {
+            createAccount();
             resetFields(username);
             success.setText("Your Account created successfully");
         }
@@ -40,7 +43,7 @@ public class SignupMenuController {
     private void checkUsernameError() {
         if (username.getText().length() < 4) {
             usernameError.setText("username must has at least 4 characters");
-        }
+        } else if (dataBase.getUser(username.getText()) != null) usernameError.setText("The username already taken");
     }
 
     private void checkPasswordError() {
@@ -71,5 +74,6 @@ public class SignupMenuController {
 
     private void createAccount() {
         User newUser = new User(username.getText(), password.getText());
+        dataBase.addUser(newUser);
     }
 }

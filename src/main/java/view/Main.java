@@ -8,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.DataBase;
 
 import java.net.URL;
 
@@ -21,6 +22,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        DataBase.load();
         Main.stage = stage;
         URL url = Main.class.getResource("/FXML/main.fxml");
         assert url != null;

@@ -6,14 +6,17 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 public class LoginMenuController {
+    public Text passwordError;
+    public Text usernameError;
     @FXML
     private TextField username;
     @FXML
     private PasswordField password;
 
-    public void submit(MouseEvent mouseEvent) throws Exception {
+    public void signIn(MouseEvent mouseEvent) {
         System.out.println(username.getText());
         System.out.println(password.getText());
         if (username.getText().length() < 4){
@@ -23,7 +26,6 @@ public class LoginMenuController {
             alert.setContentText("username is week");
             alert.showAndWait();
         }
-        else  new SignupMenu().start(Main.stage);
     }
 
 }
