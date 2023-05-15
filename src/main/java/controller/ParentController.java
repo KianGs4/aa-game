@@ -2,10 +2,10 @@ package controller;
 
 import model.User;
 
-public class ProfileController {
+public class ParentController {
   private final  User currentUser;
 
-    public ProfileController(User currentUser) {
+    public ParentController(User currentUser) {
         this.currentUser = currentUser;
     }
 
