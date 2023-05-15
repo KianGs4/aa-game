@@ -1,20 +1,20 @@
 package view;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Menu;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import model.DataBase;
 import model.User;
+import model.UserManager;
 import model.Utils;
 
 public class LoginMenuController {
     private final DataBase dataBase = DataBase.getInstance();
     public Text passwordError;
     public Text usernameError;
+    public RadioButton radioButton;
+
     @FXML
     private TextField username;
     @FXML
@@ -25,6 +25,8 @@ public class LoginMenuController {
         checkErrors();
         if (haveError()) resetFields();
         else {
+            User currentUser = dataBase.getUser(username.getText());
+            if(radioButton.isSelected()) UserManager.setLoggedInUser(currentUser);
             //profile
         }
     }
@@ -35,7 +37,7 @@ public class LoginMenuController {
     }
 
     private void checkErrors() {
-        if (dataBase.userExists(username.getText())) usernameError.setText("The username does not exist");
+        if (!dataBase.userExists(username.getText())) usernameError.setText("The username does not exist");
         else if (!dataBase.getUser(username.getText()).isPasswordCorrect(password.getText()))
             passwordError.setText("The password entered is incorrect");
     }
@@ -51,7 +53,10 @@ public class LoginMenuController {
     }
 
     public void loginAsGuest(MouseEvent mouseEvent) {
-        dataBase.addGuest(new User(Utils.generateGuestUsername(dataBase),"@guest" ));
+        User guest = new User(Utils.generateGuestUsername(dataBase),"@guest" );
+        dataBase.addGuest(guest);
+        if(radioButton.isSelected()) UserManager.setLoggedInUser(guest);
+
         //profile
     }
 

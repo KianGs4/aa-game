@@ -27,7 +27,7 @@
             <VBox prefHeight="40.0" prefWidth="474.0">
                <children>
                     <TextField fx:id="username" prefHeight="26.0" prefWidth="129.0" promptText="username" styleClass="tf_box" />
-                  <Text fill="#dc3838" strokeType="OUTSIDE" strokeWidth="0.0" text="" fx:id="usernameError">
+                  <Text fx:id="usernameError" fill="#dc3838" strokeType="OUTSIDE" strokeWidth="0.0" text="">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
@@ -48,7 +48,7 @@
             <VBox prefHeight="40.0" prefWidth="509.0">
                <children>
                   <PasswordField fx:id="password" prefHeight="26.0" prefWidth="455.0" promptText="password" styleClass="tf_box" />
-                  <Text fill="#dc3838" strokeType="OUTSIDE" strokeWidth="0.0" text="" fx:id="passwordError">
+                  <Text fx:id="passwordError" fill="#dc3838" strokeType="OUTSIDE" strokeWidth="0.0" text="">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
@@ -69,22 +69,22 @@
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <RadioButton mnemonicParsing="false" text="Remember me" textFill="WHITE">
+            <RadioButton fx:id="radioButton" mnemonicParsing="false" text="Remember me" textFill="WHITE">
                <HBox.margin>
                   <Insets top="10.0" />
                </HBox.margin>
             </RadioButton>
-            <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="75.0" styleClass="button-1" text="Sign In" onMouseClicked="#signIn">
+            <Button mnemonicParsing="false" onMouseClicked="#signIn" prefHeight="48.0" prefWidth="108.0" styleClass="button-1" text="Sign in">
                <font>
                   <Font size="20.0" />
                </font>
                <HBox.margin>
-                  <Insets left="250.0" top="15.0" />
+                  <Insets left="220.0" top="15.0" />
                </HBox.margin>
             </Button>
          </children>
       </HBox>
-      <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="452.0" styleClass="button-1" text="Login as a Guest" onMouseClicked="#loginAsGuest" />
+      <Button mnemonicParsing="false" onMouseClicked="#loginAsGuest" prefHeight="46.0" prefWidth="452.0" styleClass="button-1" text="Login as a Guest" />
     </children>
     <padding>
         <Insets left="20.0" />
