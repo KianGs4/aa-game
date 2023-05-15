@@ -59,7 +59,7 @@
       </VBox>
       <ImageView fitHeight="571.0" fitWidth="593.0" layoutX="215.0" layoutY="-3.0">
          <image>
-            <Image url="@../../../../aa.png" />
+            <Image url="@../CSS/aa.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="585.0" fitWidth="599.0" layoutX="209.0" layoutY="-10.0">
