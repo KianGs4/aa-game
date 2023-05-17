@@ -8,3 +8,61 @@
     -fx-border-color: #DEDEE4;
     -fx-border-width: 0px 0px 1px 0px;
 }
+
+.button-1 {
+    -fx-background-color: transparent;
+    -fx-background-radius: 5px;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-text-fill: whitesmoke;
+}
+
+.button-1:hover {
+    -fx-background-color: #cccccc;
+    -fx-text-fill: black;
+}
+
+.button-2 {
+    -fx-background-color: #dc3838;
+    -fx-background-radius: 5px;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-text-fill: whitesmoke;
+}
+
+.button-2:hover {
+    -fx-background-color: #FF0000;
+    -fx-text-fill: black;
+}
+
+.dialog {
+    -fx-background-color: linear-gradient(to right, #dc3838, black);
+}
+
+.dialog *.header-panel {
+    -fx-background-color: linear-gradient(to right, #dc3838, black);
+    -fx-font-size: 30px;
+    -fx-text-fill: white;
+}
+
+.dialog > *.content.label {
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+
+}
+
+.dialog > *.button-bar *.button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 5px;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-text-fill: whitesmoke;
+}
+
+.dialog > *.button-bar *.button:hover {
+    -fx-background-color: #000000;
+    -fx-text-fill: white;
+}

@@ -30,7 +30,7 @@ public class Main extends Application {
         Scene scene = new Scene(anchorPane);
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
-        stage.initStyle(StageStyle.UTILITY);
+      //  stage.initStyle(StageStyle.UTILITY);
         stage.show();
     }
 }

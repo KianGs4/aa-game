@@ -43,6 +43,12 @@ public class DataBase {
         updateData();
     }
 
+    public void removeUser(User user) {
+        users.remove(user.getUsername());
+        userRankings.remove(user);
+        updateData();
+    }
+
     public void addGuest(User user) {
         users.put(user.getUsername(), user);
         userRankings.add(user);
