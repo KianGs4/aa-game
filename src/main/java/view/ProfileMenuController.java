@@ -117,4 +117,12 @@ public class ProfileMenuController implements Initializable {
         DataBase.getInstance().removeUser(PrimaryMenuController.currentUser);
         new Main().start(Main.stage);
     }
+
+    public void goToLoginMenu(MouseEvent mouseEvent) throws Exception {
+        new Main().start(Main.stage);
+    }
+
+    public void goToPrimaryMenu(MouseEvent mouseEvent) throws Exception {
+        new PrimaryMenu().start(Main.stage);
+    }
 }

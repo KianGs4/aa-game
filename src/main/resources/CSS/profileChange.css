@@ -38,11 +38,11 @@
 }
 
 .dialog {
-    -fx-background-color: linear-gradient(to right, #dc3838, black);
+    -fx-background-color: linear-gradient(to right, #151928, black);
 }
 
 .dialog *.header-panel {
-    -fx-background-color: linear-gradient(to right, #dc3838, black);
+    -fx-background-color: linear-gradient(to right, #151928, black);
     -fx-font-size: 30px;
     -fx-text-fill: white;
 }

@@ -37,7 +37,7 @@
       <TextField fx:id="changeBox" layoutX="142.0" layoutY="483.0" prefHeight="26.0" prefWidth="202.0" promptText="text" styleClass="tf_box" />
       <Text fx:id="defText" fill="WHITE" layoutX="14.0" layoutY="501.0" strokeType="OUTSIDE" strokeWidth="0.0" text="make your change : " wrappingWidth="174.39999999999998" />
       <Text fx:id="message" fill="WHITE" layoutX="142.0" layoutY="529.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <Button layoutX="38.0" layoutY="286.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="195.0" styleClass="button-1" text="Sign Out">
+      <Button layoutX="38.0" layoutY="286.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="195.0" styleClass="button-1" text="Sign Out" onMouseClicked="#goToLoginMenu">
          <graphic>
             <FontAwesomeIcon fill="#fafafa" glyphName="SIGN_OUT" size="25" />
          </graphic>
@@ -45,7 +45,7 @@
             <Insets right="34.0" />
          </padding>
       </Button>
-      <Button layoutX="38.0" layoutY="240.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="195.0" styleClass="button-1" text="Home">
+      <Button layoutX="38.0" layoutY="240.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="195.0" styleClass="button-1" text="Home" onMouseClicked="#goToPrimaryMenu">
          <graphic>
             <FontAwesomeIcon fill="WHITE" glyphName="HOME" size="25" />
          </graphic>
