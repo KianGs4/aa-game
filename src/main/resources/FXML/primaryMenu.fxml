@@ -39,7 +39,7 @@
                   <Insets right="60.0" />
                </padding>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="71.0" prefWidth="215.0" text="ScoreBoard" textFill="WHITE">
+            <Button mnemonicParsing="false" prefHeight="71.0" prefWidth="215.0" text="ScoreBoard" textFill="WHITE" onMouseClicked="#goToScoreBoardMenu">
                <graphic>
                   <FontAwesomeIcon fill="WHITE" glyphName="GROUP" size="15" />
                </graphic>

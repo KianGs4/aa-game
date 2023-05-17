@@ -1,0 +1,58 @@
+.pane-1 {
+    -fx-background-color: #000000;
+
+}
+
+.pane-2 {
+    -fx-background-color: linear-gradient(to right, #151928, black);
+    -fx-border-color: linear-gradient(to top , black, whitesmoke);
+    -fx-border-width: 4px;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+}
+.scoreboard_table {
+    -fx-background-color: linear-gradient(to right, #151928, black);
+    -fx-border-color: #ff0066 black  whitesmoke black;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+}
+
+.gold {
+    -fx-background-color: gold;
+}
+
+.silver {
+    -fx-background-color: silver;
+}
+
+.bronze {
+    -fx-background-color: #CD7F32;
+}
+
+.current-user-in-scoreboard {
+    -fx-background-color: green;
+}
+
+.scoreboard_table-title{
+    -fx-background-color: #ff0066;
+    -fx-background-radius: 8px 8px 0px 0px;
+}
+
+.header {
+-fx-background-color:  #151928;
+}
+
+.button{
+    -fx-background-color: transparent;
+    -fx-background-radius: 5px;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-text-fill: whitesmoke;
+}
+
+.button:hover {
+    -fx-background-color: #cccccc;
+    -fx-text-fill: black;
+}
+

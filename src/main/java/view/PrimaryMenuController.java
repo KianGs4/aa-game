@@ -19,4 +19,7 @@ public class PrimaryMenuController {
     }
 
 
+    public void goToScoreBoardMenu(MouseEvent mouseEvent) throws Exception {
+        new ScoreboardMenu().start(Main.stage);
+    }
 }

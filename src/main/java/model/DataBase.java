@@ -39,6 +39,7 @@ public class DataBase {
     public void addUser(User user) {
         users.put(user.getUsername(), user);
         userRankings.add(user);
+        updateRankings();
         // do we need to call updateRankings() here?
         updateData();
     }
@@ -72,6 +73,9 @@ public class DataBase {
         return 0;
     }
 
+    public ArrayList<User> getUserRankings() {
+        return userRankings;
+    }
 
     public boolean userExists(String username) {
         return users.containsKey(username);

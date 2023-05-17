@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="571.0" prefWidth="807.0" styleClass="pane-1" stylesheets="@../CSS/scoreboard.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ScoreBoardMenuController">
+   <children>
+      <Pane layoutX="156.0" layoutY="97.0" prefHeight="102.0" prefWidth="496.0" styleClass="pane-2">
+         <children>
+            <Text fill="WHITE" layoutX="29.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your score">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Circle fx:id="showCircle_currentUser" fill="#202020" layoutX="165.0" layoutY="50.0" radius="42.0" stroke="BLACK" strokeType="INSIDE" />
+            <Text fx:id="userPoint" fill="WHITE" layoutX="207.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="210.3031005859375">
+               <font>
+                  <Font name="System Bold" size="53.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="397.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ponits">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+         </children></Pane>
+      <HBox alignment="CENTER_RIGHT" prefHeight="84.0" prefWidth="807.0" styleClass="header">
+         <children>
+            <Text fx:id="label" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="aa">
+               <font>
+                  <Font size="69.0" />
+               </font>
+            </Text>
+            <Text fx:id="username" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="username" textAlignment="RIGHT" wrappingWidth="606.1368341445923">
+               <font>
+                  <Font size="34.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Text>
+            <Circle fx:id="circle_currentUser" fill="#202020" radius="42.0" stroke="BLACK" strokeType="INSIDE">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Circle>
+         </children>
+      </HBox>
+      <VBox fx:id="vBox" layoutX="70.0" layoutY="200.0" prefHeight="353.0" prefWidth="666.0" styleClass="scoreboard_table">
+         <children>
+            <Pane prefHeight="51.0" prefWidth="666.0" styleClass="scoreboard_table-title">
+               <children>
+                  <Text fill="WHITE" layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scoreboard">
+                     <font>
+                        <Font name="System Bold" size="26.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="666.0" styleClass="gold">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="1st" />
+                  <Circle fill="#202020" radius="24.0" stroke="BLACK" strokeType="INSIDE">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </Circle>
+                  <Label prefHeight="26.0" prefWidth="132.0" text="username" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </Label>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="100000" textAlignment="RIGHT" wrappingWidth="46.51330757141113" />
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="points">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="666.0" styleClass="silver">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="2st" />
+                  <Circle fill="#202020" radius="24.0" stroke="BLACK" strokeType="INSIDE">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </Circle>
+                  <Label prefHeight="26.0" prefWidth="132.0" text="username" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </Label>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="100000" textAlignment="RIGHT" wrappingWidth="46.51330757141113" />
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="points">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="666.0" styleClass="bronze">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="3st" />
+                  <Circle fill="#202020" radius="24.0" stroke="BLACK" strokeType="INSIDE">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </Circle>
+                  <Label prefHeight="26.0" prefWidth="132.0" text="username" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </Label>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="100000" textAlignment="RIGHT" wrappingWidth="46.51330757141113" />
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="points">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="666.0" styleClass="pane-1">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="4st" />
+                  <Circle fill="#202020" radius="24.0" stroke="BLACK" strokeType="INSIDE">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </Circle>
+                  <Label prefHeight="26.0" prefWidth="132.0" text="username" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </Label>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="100000" textAlignment="RIGHT" wrappingWidth="46.51330757141113" />
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="points">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="666.0" styleClass="header">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="5st" />
+                  <Circle fill="#202020" radius="24.0" stroke="BLACK" strokeType="INSIDE">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </Circle>
+                  <Label prefHeight="26.0" prefWidth="132.0" text="username" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </Label>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="100000" textAlignment="RIGHT" wrappingWidth="46.51330757141113" />
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="points">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="666.0" styleClass="pane-1">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="6st" />
+                  <Circle fill="#202020" radius="24.0" stroke="BLACK" strokeType="INSIDE">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </Circle>
+                  <Label prefHeight="26.0" prefWidth="132.0" text="username" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </Label>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="100000" textAlignment="RIGHT" wrappingWidth="46.51330757141113" />
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="points">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Button layoutX="-16.0" layoutY="526.0" mnemonicParsing="false" onMouseClicked="#back" prefHeight="26.0" prefWidth="75.0" text="back">
+         <graphic>
+            <FontAwesomeIcon fill="WHITE" glyphName="SIGN_OUT" />
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>
