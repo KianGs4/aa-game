@@ -47,7 +47,7 @@
                   <Insets right="35.0" />
                </padding>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="71.0" prefWidth="215.0" text="Setting" textFill="WHITE">
+            <Button mnemonicParsing="false" prefHeight="71.0" prefWidth="215.0" text="Setting" textFill="WHITE" onMouseClicked="#goToSetting">
                <graphic>
                   <FontAwesomeIcon fill="WHITE" glyphName="GEAR" size="15" />
                </graphic>

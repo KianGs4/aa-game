@@ -43,9 +43,11 @@ public class ProfileMenuController implements Initializable {
         password.setText(currentUser.getPassword());
         defText.setText("");
         message.setText("");
+        changeBox.setVisible(false);
     }
 
     public void changeUsername() {
+        changeBox.setVisible(true);
         message.setText("");
         defText.setText("make your change");
         changeBox.setPromptText("username");
@@ -74,6 +76,7 @@ public class ProfileMenuController implements Initializable {
     }
 
     public void changePassword() {
+        changeBox.setVisible(true);
         message.setText("");
         defText.setText("make your change");
         changeBox.setPromptText("password");

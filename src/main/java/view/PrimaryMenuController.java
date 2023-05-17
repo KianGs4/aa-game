@@ -22,4 +22,8 @@ public class PrimaryMenuController {
     public void goToScoreBoardMenu(MouseEvent mouseEvent) throws Exception {
         new ScoreboardMenu().start(Main.stage);
     }
+
+    public void goToSetting(MouseEvent mouseEvent) throws Exception {
+        new SettingMenu().start(Main.stage);
+    }
 }

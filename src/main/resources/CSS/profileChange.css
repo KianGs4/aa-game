@@ -7,6 +7,8 @@
     -fx-background-color: transparent;
     -fx-border-color: #DEDEE4;
     -fx-border-width: 0px 0px 1px 0px;
+    -fx-text-fill: #2196f3;
+
 }
 
 .button-1 {

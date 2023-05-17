@@ -53,17 +53,10 @@ public class ScoreBoardMenuController implements Initializable {
         ObservableList<Node> children = ((HBox) node).getChildren();
         if (index < DataBase.getInstance().getUserRankings().size()) {
             User user = DataBase.getInstance().getUserRankings().get(index);
-            URL avatar = ProfileMenuController.class.getResource(user.getAvatar());
-            assert avatar != null;
-            Image img = new Image(avatar.toString());
-            ((Circle) children.get(1)).setFill(new ImagePattern(img));
-            ((Label) children.get(2)).setText(user.getUsername());
-            ((Text) children.get(3)).setText(Integer.valueOf(user.getHighScore()).toString());
-            if (user.equals(PrimaryMenuController.currentUser)) {
-                node.getStyleClass().removeAll();
-                ((HBox) node).getStylesheets().add(getClass().getResource("/CSS/scoreboard.css").toString());
-                ((HBox) node).getStyleClass().add("current-user-in-scoreboard");
-            }
+            addUserToRanking(children,user);
+            if (user.equals(PrimaryMenuController.currentUser) ||
+                    (index == 5 && (DataBase.getInstance().getUserRank(PrimaryMenuController.currentUser) >= 6)) )
+                showCurrentUser(node);
         } else {
             node.setVisible(false);
         }
@@ -73,6 +66,21 @@ public class ScoreBoardMenuController implements Initializable {
 
     public void back(MouseEvent mouseEvent) throws Exception {
         new PrimaryMenu().start(Main.stage);
+    }
+
+    private void showCurrentUser(Node node) {
+        node.getStyleClass().removeAll();
+        ((HBox) node).getStylesheets().add(getClass().getResource("/CSS/scoreboard.css").toString());
+        ((HBox) node).getStyleClass().add("current-user-in-scoreboard");
+    }
+
+    private void addUserToRanking(ObservableList<Node> children, User user) {
+        URL avatar = ProfileMenuController.class.getResource(user.getAvatar());
+        assert avatar != null;
+        Image img = new Image(avatar.toString());
+        ((Circle) children.get(1)).setFill(new ImagePattern(img));
+        ((Label) children.get(2)).setText(user.getUsername());
+        ((Text) children.get(3)).setText(Integer.valueOf(user.getHighScore()).toString());
     }
 }
 
