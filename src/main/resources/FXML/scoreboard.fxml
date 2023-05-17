@@ -95,7 +95,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="666.0" styleClass="silver">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="2st" />
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="2nd" />
                   <Circle fill="#202020" radius="24.0" stroke="BLACK" strokeType="INSIDE">
                      <HBox.margin>
                         <Insets left="15.0" />
@@ -119,7 +119,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="666.0" styleClass="bronze">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="3st" />
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="3rd" />
                   <Circle fill="#202020" radius="24.0" stroke="BLACK" strokeType="INSIDE">
                      <HBox.margin>
                         <Insets left="15.0" />
@@ -143,7 +143,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="666.0" styleClass="pane-1">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="4st" />
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="4th" />
                   <Circle fill="#202020" radius="24.0" stroke="BLACK" strokeType="INSIDE">
                      <HBox.margin>
                         <Insets left="15.0" />
@@ -167,7 +167,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="666.0" styleClass="header">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="5st" />
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="5th" />
                   <Circle fill="#202020" radius="24.0" stroke="BLACK" strokeType="INSIDE">
                      <HBox.margin>
                         <Insets left="15.0" />
@@ -191,7 +191,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="666.0" styleClass="pane-1">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="6st" />
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="6th" />
                   <Circle fill="#202020" radius="24.0" stroke="BLACK" strokeType="INSIDE">
                      <HBox.margin>
                         <Insets left="15.0" />

@@ -1,0 +1,63 @@
+.pane {
+    -fx-background-color: #000000;
+}
+
+.Vbox {
+    /*-fx-border-color: whitesmoke;*/
+    -fx-background-color: #000000;
+    -fx-border-color: gray gray black black;
+}
+
+.HBox {
+    -fx-background-color: #000000;
+    -fx-border-color: gray black black black;
+}
+
+.button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 5px;
+    -fx-border-color: gray black gray black;
+    -fx-text-fill: whitesmoke;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to right, #151928, black);
+    -fx-text-fill: whitesmoke;
+    -fx-font-size: 14px;
+}
+
+.button-2 {
+    -fx-background-color: transparent;
+    -fx-background-radius: 5px;
+    -fx-border-color: black gray black black;
+    -fx-text-fill: whitesmoke;
+}
+
+.button-2:hover {
+    -fx-background-color: linear-gradient(to right, #151928, black);
+    -fx-text-fill: whitesmoke;
+    -fx-font-size: 18px ;
+}
+
+.button-save {
+    -fx-background-color: transparent;
+    -fx-background-radius: 5px;
+    -fx-border-color: black gray black black;
+    -fx-text-fill:  whitesmoke;
+}
+
+.button-save:hover {
+    -fx-background-color: linear-gradient(to right,  #2196f3, black);
+    -fx-text-fill: whitesmoke;
+    -fx-font-size: 20px ;
+    -fx-font: Berlin Sans FB;
+}
+
+.slider .thumb {
+    -fx-background-color: linear-gradient(to top, white, #2196f3);
+
+}
+
+.slider .track {
+    -fx-background-color: linear-gradient(to right, white, #2196f3);
+}
