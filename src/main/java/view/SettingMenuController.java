@@ -1,5 +1,6 @@
 package view;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,6 +16,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class SettingMenuController implements Initializable {
+    public RadioButton mode;
+    public ChoiceBox languageBox;
+    public ChoiceBox difficultyBox;
     //TODO Handle close and save option
     //TODO make more CSS
 
@@ -71,10 +75,23 @@ public class SettingMenuController implements Initializable {
         ((ChoiceBox) samplePane.getChildren().get(0)).getItems().addAll("English", "Persian");
         ((ChoiceBox) samplePane.getChildren().get(0)).setValue(GameSetting.getLanguage());
         ((Slider) samplePane.getChildren().get(4)).setValue(GameSetting.getSound());
+        ((RadioButton) samplePane.getChildren().get(3)).setSelected((GameSetting.isBW_mode()));
     }
 
     public void changeNumberOfBalls(MouseEvent mouseEvent) {
         ballsValue.setText(Integer.valueOf((int) slider.getValue()).toString());
+        GameSetting.setNumberOfBalls(Integer.parseInt(ballsValue.getText()));
     }
 
+    public void selectBWmode(ActionEvent actionEvent) {
+        GameSetting.setBW_mode(mode.isSelected());
+    }
+
+    public void changeLanguage(ActionEvent actionEvent) {
+        GameSetting.setLanguage(languageBox.getValue().toString());
+    }
+
+    public void changeDifficulty(ActionEvent actionEvent) {
+        GameSetting.setDifficulty(difficultyBox.getValue().toString());
+    }
 }

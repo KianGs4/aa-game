@@ -24,6 +24,6 @@
             <Font name="Berlin Sans FB" size="36.0" />
          </font>
       </Text>
-      <ChoiceBox layoutX="367.0" layoutY="118.0" prefHeight="33.0" prefWidth="164.0" styleClass="increment-arrow" />
+      <ChoiceBox layoutX="367.0" layoutY="118.0" prefHeight="33.0" prefWidth="164.0"  fx:id="difficultyBox" onAction="#changeDifficulty" />
    </children>
 </Pane>

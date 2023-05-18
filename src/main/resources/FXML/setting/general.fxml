@@ -10,7 +10,7 @@
 
 <Pane prefHeight="454.5" prefWidth="586.4" styleClass="pane" stylesheets="@../../CSS/setting.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SettingMenuController">
    <children>
-      <ChoiceBox layoutX="330.0" layoutY="166.0" prefHeight="39.0" prefWidth="178.0" />
+      <ChoiceBox layoutX="330.0" layoutY="166.0" prefHeight="39.0" prefWidth="178.0" onAction="#changeLanguage" fx:id="languageBox" />
       <Text fill="WHITE" layoutX="61.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sound :" wrappingWidth="231.63592529296875">
          <font>
             <Font name="Berlin Sans FB" size="48.0" />
@@ -21,13 +21,13 @@
             <Font name="Berlin Sans FB" size="48.0" />
          </font>
       </Text>
-      <RadioButton layoutX="61.0" layoutY="295.0" mnemonicParsing="false" text="Black and White Mode " textFill="WHITE">
+      <RadioButton layoutX="61.0" layoutY="295.0" mnemonicParsing="false" text="Black and White Mode " textFill="WHITE" onAction="#selectBWmode" fx:id="mode">
          <font>
             <Font size="21.0" />
          </font>
       </RadioButton>
       <Slider layoutX="279.0" layoutY="55.0" max="20.0" />
-      <FontAwesomeIcon fill="WHITE" layoutX="253.0" layoutY="69.0" size="20" text="" />
-      <FontAwesomeIcon fill="WHITE" layoutX="419.0" layoutY="69.0" size="20" />
+      <FontAwesomeIcon fill="WHITE" glyphName="CIRCLE" layoutX="419.0" layoutY="69.0" size="20" />
+      <FontAwesomeIcon fill="WHITE" glyphName="CIRCLE" layoutX="258.0" layoutY="69.0" size="20" />
    </children>
 </Pane>
