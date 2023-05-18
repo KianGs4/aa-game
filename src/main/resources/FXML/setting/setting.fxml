@@ -22,7 +22,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Text>
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="186.0" text="General">
+            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="186.0" text="General" onMouseClicked="#openGeneralSetting">
                <graphic>
                   <FontAwesomeIcon fill="WHITE" glyphName="GEARS" size="20" />
                </graphic>
@@ -53,20 +53,20 @@
          <children>
             <Button mnemonicParsing="false" prefHeight="93.0" prefWidth="190.0" styleClass="button-2" text="Help">
                <font>
-                  <Font size="20.0" />
+                  <Font name="Berlin Sans FB" size="20.0" />
                </font>
                <graphic>
                   <FontAwesomeIcon fill="WHITE" glyphName="QUESTION" size="20" />
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="147.0" styleClass="button-2" text="Cancel">
+            <Button mnemonicParsing="false" prefHeight="93.0" prefWidth="190.0" styleClass="button-2" text="Cancel">
                <font>
-                  <Font size="20.0" />
+                  <Font name="Berlin Sans FB" size="20.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="115.0" styleClass="button-save" text="save" textFill="#4171a4">
+            <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="115.0" styleClass="button-save" text="save" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="Berlin Sans FB Bold" size="20.0" />
                </font>
             </Button>
          </children>

@@ -50,7 +50,6 @@
     -fx-background-color: linear-gradient(to right,  #2196f3, black);
     -fx-text-fill: whitesmoke;
     -fx-font-size: 20px ;
-    -fx-font: Berlin Sans FB;
 }
 
 .slider .thumb {
@@ -61,3 +60,26 @@
 .slider .track {
     -fx-background-color: linear-gradient(to right, white, #2196f3);
 }
+
+.choice-box {
+    -fx-background-color: #ACACAC;
+    -fx-background-radius: 50px;
+    -fx-border-radius: 50px;
+    -fx-border-color: whitesmoke;
+    -fx-text-fill: #2196f3;
+
+
+}
+.choice-box:hover {
+    -fx-text-fill: #2196f3 ;
+}
+
+.choice-box-base:hover {
+    -fx-border-color: #2196f3;
+
+}
+
+.choice-box .list-view {
+    -fx-background-color: #2196f3;
+}
+
