@@ -1,14 +1,18 @@
 package view;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import model.DataBase;
 import model.GameSetting;
 
 import java.io.IOException;
@@ -17,10 +21,14 @@ import java.util.ResourceBundle;
 
 public class SettingMenuController implements Initializable {
     public RadioButton mode;
-    public ChoiceBox languageBox;
-    public ChoiceBox difficultyBox;
+    public ChoiceBox languageBox, difficultyBox;
+    public Button shootButton;
+    public Button freezeButton;
+
     //TODO Handle close and save option
     //TODO make more CSS
+    //TODO Handle maps to json
+
 
     @FXML
     private Text ballsValue;
@@ -55,6 +63,8 @@ public class SettingMenuController implements Initializable {
         ((Text) samplePane.getChildren().get(2)).setText(Integer.valueOf(GameSetting.getNumberOfBalls()).toString());
         ((ChoiceBox) samplePane.getChildren().get(4)).getItems().addAll("Easy", "Medium", "Hard");
         ((ChoiceBox) samplePane.getChildren().get(4)).setValue(GameSetting.getDifficulty());
+        ((Button) samplePane.getChildren().get(6)).setText(GameSetting.getShootKey().toString());
+        ((Button) samplePane.getChildren().get(8)).setText(GameSetting.getFrozenKey().toString());
 
     }
 
@@ -76,6 +86,8 @@ public class SettingMenuController implements Initializable {
         ((ChoiceBox) samplePane.getChildren().get(0)).setValue(GameSetting.getLanguage());
         ((Slider) samplePane.getChildren().get(4)).setValue(GameSetting.getSound());
         ((RadioButton) samplePane.getChildren().get(3)).setSelected((GameSetting.isBW_mode()));
+
+
     }
 
     public void changeNumberOfBalls(MouseEvent mouseEvent) {
@@ -93,5 +105,38 @@ public class SettingMenuController implements Initializable {
 
     public void changeDifficulty(ActionEvent actionEvent) {
         GameSetting.setDifficulty(difficultyBox.getValue().toString());
+    }
+
+    public void changeShootKey(MouseEvent mouseEvent) {
+        final boolean[] keyAlertPressed = new boolean[2];
+
+        Main.stage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (!keyAlertPressed[0] || !keyAlertPressed[1]) {
+                    GameSetting.setShootKey(keyEvent.getCode());
+                    shootButton.setText(keyEvent.getCode().toString());
+                    if (keyAlertPressed[0]) keyAlertPressed[1] = true;
+                    keyAlertPressed[0] = true;
+                }
+            }
+        });
+
+    }
+
+    public void changeFreezeKey(MouseEvent mouseEvent) {
+        final boolean[] keyAlertPressed = new boolean[2];
+
+        Main.stage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (!keyAlertPressed[0] || !keyAlertPressed[1]) {
+                    GameSetting.setFrozenKey(keyEvent.getCode());
+                    freezeButton.setText(keyEvent.getCode().toString());
+                    if (keyAlertPressed[0]) keyAlertPressed[1] = true;
+                    keyAlertPressed[0] = true;
+                }
+            }
+        });
     }
 }

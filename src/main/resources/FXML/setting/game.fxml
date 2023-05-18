@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.Pane?>
@@ -24,6 +25,18 @@
             <Font name="Berlin Sans FB" size="36.0" />
          </font>
       </Text>
-      <ChoiceBox layoutX="367.0" layoutY="118.0" prefHeight="33.0" prefWidth="164.0"  fx:id="difficultyBox" onAction="#changeDifficulty" />
+      <ChoiceBox fx:id="difficultyBox" layoutX="367.0" layoutY="118.0" onAction="#changeDifficulty" prefHeight="33.0" prefWidth="164.0" />
+      <Text fill="WHITE" layoutX="14.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="shoot :    press             key" wrappingWidth="402.9367561340332">
+         <font>
+            <Font name="Berlin Sans FB" size="36.0" />
+         </font>
+      </Text>
+      <Button layoutX="236.0" layoutY="212.0" mnemonicParsing="false" onMouseClicked="#changeShootKey" prefHeight="33.0" prefWidth="75.0" styleClass="button-1" text="SPACE" fx:id="shootButton" />
+      <Text fill="WHITE" layoutX="14.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="freeze:   press             key" wrappingWidth="402.9367561340332">
+         <font>
+            <Font name="Berlin Sans FB" size="36.0" />
+         </font>
+      </Text>
+      <Button layoutX="236.0" layoutY="279.0" mnemonicParsing="false" onMouseClicked="#changeFreezeKey" prefHeight="33.0" prefWidth="75.0" styleClass="button-1" text="TAB" fx:id="freezeButton" />
    </children>
 </Pane>
