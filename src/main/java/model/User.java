@@ -7,7 +7,7 @@ public class User {
     private  String username;
     public boolean isGuest;
     private String avatar;
-    private final int  highScore;
+    private int  highScore;
 
     public User(String username, String password) {
         this.username = username;
@@ -55,5 +55,9 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public void setHighScore(int highScore) {
+        this.highScore = highScore;
     }
 }

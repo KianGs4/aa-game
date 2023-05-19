@@ -23,10 +23,10 @@ public class ShootingBall extends StackPane {
 
     private void initialiseText(String text) {
         this.text = new Text(text);
-        this.text.setY(ball.getCenterY() + 3 );
+        this.text.setY(ball.getCenterY() + ball.getRadius()/3 );
 
         if (Integer.parseInt(text) < 10 ) {
-            this.text.setX(ball.getCenterX() - 3);
+            this.text.setX(ball.getCenterX() - ball.getRadius()/3);
         } else {
             this.text.setX(ball.getCenterX() - ball.getRadius()/2);
         }

@@ -45,3 +45,10 @@
     -fx-text-fill: #ffffff;
 }
 
+.red-pane {
+    -fx-background-color: red;
+}
+
+.green-pane {
+    -fx-background-color: #00ff00;
+}

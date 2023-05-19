@@ -16,7 +16,7 @@ public class ShootingAnimation extends Transition {
         this.centralBall = centralBall;
         this.shootingBall = shootingBall;
         this.gameMenu = gameMenu;
-        this.setCycleDuration(Duration.millis(10000));
+        this.setCycleDuration(Duration.millis(5000));
         this.setCycleCount(-1);
     }
 

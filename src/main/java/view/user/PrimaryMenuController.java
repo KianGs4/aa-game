@@ -30,6 +30,7 @@ public class PrimaryMenuController {
     }
 
     public void goToGame(MouseEvent mouseEvent) throws IOException {
+        GameMenu.currentPlayer = currentUser;
         new GameMenu().start(Main.stage);
     }
 }
