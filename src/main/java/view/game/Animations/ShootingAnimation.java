@@ -5,16 +5,17 @@ import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import model.CentralBall;
 import model.ShootingBall;
+import view.game.GameMenu;
 
 public class ShootingAnimation extends Transition {
-    private CentralBall centralBall;
-    private ShootingBall shootingBall;
-    private Pane pane;
+    private final CentralBall centralBall;
+    private final ShootingBall shootingBall;
+    private final GameMenu  gameMenu;
 
-    public ShootingAnimation(CentralBall centralBall, ShootingBall shootingBall, Pane pane) {
+    public ShootingAnimation(CentralBall centralBall, ShootingBall shootingBall, GameMenu gameMenu) {
         this.centralBall = centralBall;
         this.shootingBall = shootingBall;
-        this.pane = pane;
+        this.gameMenu = gameMenu;
         this.setCycleDuration(Duration.millis(1000));
         this.setCycleCount(-1);
     }
@@ -24,6 +25,7 @@ public class ShootingAnimation extends Transition {
         double y = shootingBall.getLayoutY() - 10 ;
         if (shootingBall.getBoundsInParent().intersects(centralBall.getBoundsInParent())) {
             centralBall.addBall(shootingBall);
+            gameMenu.setRotation(shootingBall);
             this.stop();
         }
         shootingBall.setLayoutY(y);

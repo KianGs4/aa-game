@@ -27,4 +27,8 @@ public class ShootingBall extends StackPane {
         this.setLayoutY(this.getLayoutY() - 50);
         ball.setCenterY(ball.getCenterY() - 10);
     }
+
+    public double getRadius(){
+        return ball.getRadius();
+    }
 }

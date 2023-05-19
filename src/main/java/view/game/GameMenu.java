@@ -1,13 +1,11 @@
 package view.game;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.PathTransition;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Point3D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -15,6 +13,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
@@ -33,6 +32,8 @@ import java.net.URL;
 public class GameMenu extends Application {
 
     private Game game;
+
+    @FXML
     private Pane pane;
 
     @Override
@@ -48,7 +49,7 @@ public class GameMenu extends Application {
         pane.getChildren().get(1).requestFocus();
         pane.getChildren().get(1).setVisible(false);
         stage.show();
-        setRotation(game.getSecondCentralBall());
+        //  setRotation();
         createBall();
     }
 
@@ -67,20 +68,37 @@ public class GameMenu extends Application {
     }
 
     private void shootAction() {
-        ShootingAnimation shootingAnimation = new ShootingAnimation(game.getSecondCentralBall(),game.getShootingBalls().get(0), this.pane );
+        ShootingAnimation shootingAnimation = new ShootingAnimation(game.getSecondCentralBall(), game.getShootingBalls().get(0), this);
         shootingAnimation.play();
         game.shoot();
         pane.getChildren().add(game.getShootingBalls().get(1));
+        System.out.println("object in pane " + pane.getChildren().size());
         game.getShootingBalls().get(0).moveToShoot();
 
     }
 
 
-    private void setRotation(Node centralBall) {
+    public void setRotation(ShootingBall shootingBall) {
         switch (game.getPhase()) {
             case PHASE_1:
-
+                rotateInPhase1(shootingBall);
         }
+    }
+
+    private void rotateInPhase1(ShootingBall shootingBall) {
+
+        Rotate earthRotate = new Rotate();
+        System.out.println(shootingBall.getLayoutY());
+        earthRotate.setPivotY(game.getSecondCentralBall().getCenterY() - shootingBall.getLayoutY());
+        earthRotate.setPivotX(0);
+        shootingBall.getTransforms().add(earthRotate);
+        Timeline earthTimeline = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(earthRotate.angleProperty(), 0)),
+                new KeyFrame(Duration.seconds(2), new KeyValue(earthRotate.angleProperty(), 360))
+        );
+        earthTimeline.setCycleCount(Timeline.INDEFINITE);
+        earthTimeline.play();
+
     }
 
 

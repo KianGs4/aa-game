@@ -14,4 +14,8 @@ public class CentralBall extends Circle {
     public void addBall(ShootingBall shootingBall) {
         balls.add(shootingBall);
     }
+
+    public ArrayList<ShootingBall> getBalls() {
+        return balls;
+    }
 }
