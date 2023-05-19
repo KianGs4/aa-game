@@ -7,14 +7,14 @@ import model.ShootingBall;
 
 public class IncreaseBallRadiusAnimation extends Transition {
     private CentralBall centralBall;
-    private boolean BigMode;
+    private boolean bigMode;
     private boolean smallMode;
 
     public IncreaseBallRadiusAnimation(CentralBall centralBall) {
         this.centralBall = centralBall;
         this.setCycleCount(-1);
         this.setCycleDuration(Duration.millis(2000));
-        BigMode = false;
+        bigMode = false;
         smallMode = true;
     }
 
@@ -24,7 +24,7 @@ public class IncreaseBallRadiusAnimation extends Transition {
             if (smallMode) increaseRadius();
         }
         if (v > 0.5){
-            if (BigMode) reduceRadius();
+            if (bigMode) reduceRadius();
         }
     }
 
@@ -32,14 +32,14 @@ public class IncreaseBallRadiusAnimation extends Transition {
         for (ShootingBall shootingBall : centralBall.getBalls()) {
             shootingBall.getBall().setRadius(shootingBall.getBall().getRadius()*21/20);
         }
-        BigMode = true;
+        bigMode = true;
         smallMode = false;
     }
     private void reduceRadius() {
         for (ShootingBall shootingBall : centralBall.getBalls()) {
             shootingBall.getBall().setRadius(shootingBall.getBall().getRadius()*20/21);
         }
-        BigMode = false;
+        bigMode = false;
         smallMode = true;
     }
 }

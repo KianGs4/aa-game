@@ -20,6 +20,7 @@ import view.Main;
 import view.game.Animations.IncreaseBallRadiusAnimation;
 import view.game.Animations.LooseGameAnimation;
 import view.game.Animations.ShootingAnimation;
+import view.game.Animations.VisibilityModeAnimation;
 import view.user.PrimaryMenu;
 
 import java.io.IOException;
@@ -122,15 +123,26 @@ public class GameMenu extends Application {
                     game.setPhase(Phase.PHASE_2);
                     changePhase(game.getPhase());
                 }
+            case PHASE_2:
+                if ( 2* game.getCurrentBalls() <= game.getNumberOfBalls()) {
+                    game.setPhase(Phase.PHASE_3);
+                    changePhase(game.getPhase());
+                }
         }
     }
 
     private void changePhase(Phase phase) {
-        stopRotations();
-        rotations.clear();
+
         if (phase.equals(Phase.PHASE_2)) {
+            stopRotations();
+            rotations.clear();
+            new IncreaseBallRadiusAnimation(game.getSecondCentralBall()).play();
             for (ShootingBall shootingBall : game.getSecondCentralBall().getBalls())
                 rotateInPhase2(shootingBall);
+        }
+        if (phase.equals(Phase.PHASE_3)){
+            System.out.println("sala");
+            new VisibilityModeAnimation(game.getSecondCentralBall()).play();
         }
     }
 
@@ -141,8 +153,9 @@ public class GameMenu extends Application {
                 rotateInPhase1(shootingBall);
                 break;
             case PHASE_2:
-                new IncreaseBallRadiusAnimation(game.getSecondCentralBall()).play();
+            case PHASE_3:
                 rotateInPhase2(shootingBall);
+                break;
         }
     }
 
