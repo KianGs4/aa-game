@@ -16,19 +16,20 @@ public class ShootingAnimation extends Transition {
         this.centralBall = centralBall;
         this.shootingBall = shootingBall;
         this.gameMenu = gameMenu;
-        this.setCycleDuration(Duration.millis(1000));
+        this.setCycleDuration(Duration.millis(10000));
         this.setCycleCount(-1);
     }
 
     @Override
     protected void interpolate(double v) {
-        double y = shootingBall.getLayoutY() - 10 ;
-        if (shootingBall.getBoundsInParent().intersects(centralBall.getBoundsInParent())) {
+        double y = shootingBall.getBall().getCenterY() - 10 ;
+        if (shootingBall.getBall().getBoundsInParent().intersects(centralBall.getBoundsInParent())) {
             centralBall.addBall(shootingBall);
             shootingBall.makeLine(centralBall, gameMenu.pane);
             gameMenu.setRotation(shootingBall);
             this.stop();
         }
-        shootingBall.setLayoutY(y);
+        shootingBall.getBall().setCenterY(y);
+        shootingBall.getText().setY(y);
     }
 }

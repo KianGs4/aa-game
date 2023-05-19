@@ -1,25 +1,18 @@
 package view.game;
 
-import javafx.animation.*;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point3D;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import model.CentralBall;
 import model.Game;
 import model.GameSetting;
 import model.ShootingBall;
@@ -27,7 +20,6 @@ import view.Main;
 import view.game.Animations.ShootingAnimation;
 
 import java.io.IOException;
-import java.net.URL;
 
 public class GameMenu extends Application {
 
@@ -46,16 +38,16 @@ public class GameMenu extends Application {
         pane.getChildren().add(game.getSecondCentralBall());
         Scene scene = new Scene(pane);
         stage.setScene(scene);
-    //    pane.getChildren().get(1).requestFocus();
+        //    pane.getChildren().get(1).requestFocus();
         pane.getChildren().get(1).setVisible(false);
         stage.show();
-        createBall();
+        shootHandling();
     }
 
-    private void createBall() {
-        pane.getChildren().add(game.getShootingBalls().get(0));
+    private void shootHandling() {
+        createBall(game.getShootingBalls().get(0));
         game.getShootingBalls().get(0).moveToShoot();
-        pane.getChildren().add(game.getShootingBalls().get(1));
+        createBall(game.getShootingBalls().get(1));
         Main.stage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
@@ -66,11 +58,16 @@ public class GameMenu extends Application {
         });
     }
 
+    private void createBall(ShootingBall shootingBall) {
+        pane.getChildren().add(shootingBall.getBall());
+        pane.getChildren().add(shootingBall.getText());
+    }
+
     private void shootAction() {
         ShootingAnimation shootingAnimation = new ShootingAnimation(game.getSecondCentralBall(), game.getShootingBalls().get(0), this);
         shootingAnimation.play();
         game.shoot();
-        pane.getChildren().add(game.getShootingBalls().get(1));
+        createBall(game.getShootingBalls().get(1));
         game.getShootingBalls().get(0).moveToShoot();
 
     }
@@ -84,20 +81,23 @@ public class GameMenu extends Application {
     }
 
     private void rotateInPhase1(ShootingBall shootingBall) {
+        Rotate circleRotationPhase1 = new Rotate();
+        circleRotationPhase1.setPivotX(game.getSecondCentralBall().getCenterX());
+        circleRotationPhase1.setPivotY(game.getSecondCentralBall().getCenterY());
 
-        Rotate rotation = new Rotate();
-        rotation.setPivotY(game.getSecondCentralBall().getCenterY() - shootingBall.getLayoutY());
-        rotation.setPivotX(0);
-        shootingBall.getTransforms().add(rotation);
+        shootingBall.getBall().getTransforms().add(circleRotationPhase1);
+        shootingBall.getText().getTransforms().add(circleRotationPhase1);
+        shootingBall.getLine().getTransforms().add(circleRotationPhase1);
 
-
-        Timeline earthTimeline = new Timeline(
-                new KeyFrame(Duration.ZERO, new KeyValue(rotation.angleProperty(), 0)),
-                new KeyFrame(Duration.seconds(2), new KeyValue(rotation.angleProperty(), 360))
+        Timeline circleRotationPhase1TimeLine = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(circleRotationPhase1.angleProperty(), 0)),
+                new KeyFrame(Duration.seconds(2.5), new KeyValue(circleRotationPhase1.angleProperty(), 360))
         );
 
-        earthTimeline.setCycleCount(Timeline.INDEFINITE);
-        earthTimeline.play();
+
+        circleRotationPhase1TimeLine.setCycleCount(Timeline.INDEFINITE);
+        circleRotationPhase1TimeLine.play();
+
 
     }
 

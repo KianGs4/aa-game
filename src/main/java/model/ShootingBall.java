@@ -1,33 +1,43 @@
 package model;
 
-import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextBoundsType;
-import view.Main;
 
 public class ShootingBall extends StackPane {
-    Circle ball = new Circle( 14);
+    Circle ball;
     Line line;
     Text text;
 
     public ShootingBall(String text) {
-        this.text = new Text(text);
-        this.text.setBoundsType(TextBoundsType.VISUAL);
-        this.text.setFill(Paint.valueOf("white"));
+        ball = new Circle((double) 850 / 2, 646, 14);
+       initialiseText(text);
         this.getChildren().add(ball);
         this.getChildren().add(this.text);
-        this.setLayoutX((double) 850 / 2);
-        this.setLayoutY(646);
+    }
+
+    private void initialiseText(String text) {
+        this.text = new Text(text);
+        this.text.setY(ball.getCenterY() + 3 );
+
+        if (Integer.parseInt(text) < 10 ) {
+            this.text.setX(ball.getCenterX() - 3);
+        } else {
+            this.text.setX(ball.getCenterX() - ball.getRadius()/2);
+        }
+        this.text.setBoundsType(TextBoundsType.VISUAL);
+        this.text.setTextAlignment(TextAlignment.CENTER);
+        this.text.setFill(Paint.valueOf("white"));
     }
 
     public void moveToShoot() {
-        this.setLayoutY(this.getLayoutY() - 50);
-        ball.setCenterY(ball.getCenterY() - 10);
+        text.setY(text.getY() - 50);
+        ball.setCenterY(ball.getCenterY() - 50);
     }
 
     public double getRadius() {
@@ -38,12 +48,20 @@ public class ShootingBall extends StackPane {
         line = new Line();
         line.setStartX(circle.getCenterX());
         line.setStartY(circle.getCenterY());
-        line.setEndX(circle.getCenterX() + this.getChildren().get(0).getLayoutX());
-        line.setEndY(this.getLayoutY());
-          this.getChildren().add(line);
+        line.setEndX(this.ball.getCenterX());
+        line.setEndY(this.ball.getCenterY());
+        pane.getChildren().add(line);
     }
 
     public Line getLine() {
         return line;
+    }
+
+    public Circle getBall() {
+        return ball;
+    }
+
+    public Text getText() {
+        return text;
     }
 }

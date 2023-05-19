@@ -23,7 +23,7 @@ public class Game {
         this.numberOfBalls = numberOfBalls;
         currentBalls = numberOfBalls;
         phase = Phase.PHASE_1;
-        secondCentralBall = new CentralBall((double) 850 /2, (double) 420 /2, 160);
+        secondCentralBall = new CentralBall((double) 850 /2, (double) 420 /2, 240);
         firstCentralBall = makeFirstCentralBall(secondCentralBall);
         createBalls(numberOfBalls);
     }
@@ -63,7 +63,7 @@ public class Game {
     }
 
     private CentralBall makeFirstCentralBall(CentralBall centralBall) {
-        return new CentralBall(centralBall.getCenterX(),centralBall.getCenterY(),centralBall.getRadius()/2);
+        return new CentralBall(centralBall.getCenterX(),centralBall.getCenterY(),centralBall.getRadius()/3);
     }
 
     public void shoot() {
