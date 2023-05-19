@@ -119,12 +119,12 @@ public class GameMenu extends Application {
     private void checkPhaseSituation() {
         switch (game.getPhase()) {
             case PHASE_1:
-                if (4 * game.getCurrentBalls() <= game.getNumberOfBalls() * 3) {
+                if (4 * game.getCurrentBalls() < game.getNumberOfBalls() * 3) {
                     game.setPhase(Phase.PHASE_2);
                     changePhase(game.getPhase());
                 }
             case PHASE_2:
-                if ( 2* game.getCurrentBalls() <= game.getNumberOfBalls()) {
+                if ( 2* game.getCurrentBalls() < game.getNumberOfBalls()) {
                     game.setPhase(Phase.PHASE_3);
                     changePhase(game.getPhase());
                 }
@@ -141,7 +141,6 @@ public class GameMenu extends Application {
                 rotateInPhase2(shootingBall);
         }
         if (phase.equals(Phase.PHASE_3)){
-            System.out.println("sala");
             new VisibilityModeAnimation(game.getSecondCentralBall()).play();
         }
     }
@@ -199,8 +198,8 @@ public class GameMenu extends Application {
         addRotation(shootingBall, circleRotationPhase2);
         Timeline circleRotationPhase2TimeLine = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(circleRotationPhase2.angleProperty(), 0)),
-                new KeyFrame(Duration.seconds(8), new KeyValue(circleRotationPhase2.angleProperty(), 420 * (4 / game.getRotateSpeed()))),
-                new KeyFrame(Duration.seconds(16), new KeyValue(circleRotationPhase2.angleProperty(), 0)),
+                new KeyFrame(Duration.seconds(4), new KeyValue(circleRotationPhase2.angleProperty(), 380 * (4 / game.getRotateSpeed()))),
+                new KeyFrame(Duration.seconds(8), new KeyValue(circleRotationPhase2.angleProperty(), 0)),
                 new KeyFrame(Duration.ZERO, actionEvent -> {
                     for (ShootingBall shootingBallSelected : game.getSecondCentralBall().getBalls()) {
                         if (shootingBallSelected.equals(shootingBall)) continue;
