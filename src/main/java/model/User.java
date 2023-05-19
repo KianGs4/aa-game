@@ -14,7 +14,7 @@ public class User {
         this.password = password;
         this.isGuest = false;
         highScore = 0;
-        avatar = "/AVATARS/" + Utils.generateRandomAvatarUrl();
+        avatar = "/Images/AVATARS/" + Utils.generateRandomAvatarUrl();
     }
 
     public String getPassword() {

@@ -1,4 +1,4 @@
-package view;
+package view.user;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -7,13 +7,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import model.DataBase;
 import model.GameSetting;
+import view.Main;
 
 import java.io.IOException;
 import java.net.URL;
@@ -115,7 +114,7 @@ public class SettingMenuController implements Initializable {
             public void handle(KeyEvent keyEvent) {
                 if (!keyAlertPressed[0] || !keyAlertPressed[1]) {
                     GameSetting.setShootKey(keyEvent.getCode());
-                    shootButton.setText(keyEvent.getCode().toString());
+                    shootButton.setText(keyEvent.getCode().getName());
                     if (keyAlertPressed[0]) keyAlertPressed[1] = true;
                     keyAlertPressed[0] = true;
                 }
@@ -132,7 +131,7 @@ public class SettingMenuController implements Initializable {
             public void handle(KeyEvent keyEvent) {
                 if (!keyAlertPressed[0] || !keyAlertPressed[1]) {
                     GameSetting.setFrozenKey(keyEvent.getCode());
-                    freezeButton.setText(keyEvent.getCode().toString());
+                    freezeButton.setText(keyEvent.getCode().getName());
                     if (keyAlertPressed[0]) keyAlertPressed[1] = true;
                     keyAlertPressed[0] = true;
                 }

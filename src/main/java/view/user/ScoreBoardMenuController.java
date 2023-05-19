@@ -1,4 +1,4 @@
-package view;
+package view.user;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
@@ -14,6 +14,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import model.DataBase;
 import model.User;
+import view.Main;
 
 import java.net.URL;
 

@@ -1,4 +1,4 @@
-package view;
+package view.user;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,12 +8,10 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 
-public class ProfileMenu extends Application {
-
-
+public class SettingMenu extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        URL url = ProfileMenu.class.getResource("/FXML/user/profileMenu.fxml");
+        URL url = ProfileMenu.class.getResource("/FXML/setting/setting.fxml");
         assert url != null;
         AnchorPane anchorPane = FXMLLoader.load(url);
         Scene scene = new Scene(anchorPane);

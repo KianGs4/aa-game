@@ -1,4 +1,4 @@
-package view;
+package view.user;
 
 import controller.ParentController;
 import javafx.fxml.FXML;
@@ -9,6 +9,7 @@ import model.DataBase;
 import model.User;
 import model.UserManager;
 import model.Utils;
+import view.Main;
 
 public class LoginMenuController {
     private final DataBase dataBase = DataBase.getInstance();

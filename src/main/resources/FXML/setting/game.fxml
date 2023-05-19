@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="454.5" prefWidth="586.4" styleClass="pane" stylesheets="@../../CSS/setting.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SettingMenuController">
+<Pane prefHeight="454.5" prefWidth="586.4" styleClass="pane" stylesheets="@../../CSS/setting.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.user.SettingMenuController">
    <children>
       <Slider fx:id="slider" layoutX="391.0" layoutY="40.0" max="30.0" min="8.0" onMouseClicked="#changeNumberOfBalls" onMouseDragged="#changeNumberOfBalls" />
       <Text fill="WHITE" layoutX="14.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="number of balls:" wrappingWidth="334.9367561340332">

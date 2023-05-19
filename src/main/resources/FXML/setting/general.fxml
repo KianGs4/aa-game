@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="454.5" prefWidth="586.4" styleClass="pane" stylesheets="@../../CSS/setting.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SettingMenuController">
+<Pane prefHeight="454.5" prefWidth="586.4" styleClass="pane" stylesheets="@../../CSS/setting.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.user.SettingMenuController">
    <children>
       <ChoiceBox layoutX="330.0" layoutY="166.0" prefHeight="39.0" prefWidth="178.0" onAction="#changeLanguage" fx:id="languageBox" />
       <Text fill="WHITE" layoutX="61.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sound :" wrappingWidth="231.63592529296875">

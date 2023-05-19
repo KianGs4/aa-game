@@ -1,4 +1,4 @@
-package view;
+package view.user;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;

@@ -1,9 +1,8 @@
-package view;
+package view.user;
 
-import controller.ParentController;
-import javafx.scene.control.Menu;
 import javafx.scene.input.MouseEvent;
 import model.User;
+import view.Main;
 
 public class PrimaryMenuController {
     public static User currentUser;
