@@ -13,7 +13,7 @@ public class ProfileMenu extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        URL url = ProfileMenu.class.getResource("/FXML/profileMenu.fxml");
+        URL url = ProfileMenu.class.getResource("/FXML/user/profileMenu.fxml");
         assert url != null;
         AnchorPane anchorPane = FXMLLoader.load(url);
         Scene scene = new Scene(anchorPane);

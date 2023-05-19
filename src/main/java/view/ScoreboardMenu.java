@@ -13,7 +13,7 @@ public class ScoreboardMenu extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        URL url = ProfileMenu.class.getResource("/FXML/scoreboard.fxml");
+        URL url = ProfileMenu.class.getResource("/FXML/user/scoreboard.fxml");
         assert url != null;
         AnchorPane anchorPane = FXMLLoader.load(url);
         Scene scene = new Scene(anchorPane);

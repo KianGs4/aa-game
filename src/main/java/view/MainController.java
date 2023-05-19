@@ -11,7 +11,6 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 
@@ -30,7 +29,7 @@ import java.util.ResourceBundle;
             t.play();
             t.setOnFinished((e) ->{
                 try{
-                    fxml = FXMLLoader.load(getClass().getResource("/FXML/loginMenu.fxml"));
+                    fxml = FXMLLoader.load(getClass().getResource("/FXML/user/loginMenu.fxml"));
                     vbox.getChildren().removeAll();
                     vbox.getChildren().setAll(fxml);
                 }catch(IOException ex){
@@ -45,7 +44,7 @@ import java.util.ResourceBundle;
             t.play();
             t.setOnFinished((e) ->{
                 try{
-                    fxml = FXMLLoader.load(getClass().getResource("/FXML/loginMenu.fxml"));
+                    fxml = FXMLLoader.load(getClass().getResource("/FXML/user/loginMenu.fxml"));
                     vbox.getChildren().removeAll();
                     vbox.getChildren().setAll(fxml);
                 }catch(IOException ex){
@@ -60,7 +59,7 @@ import java.util.ResourceBundle;
             t.play();
             t.setOnFinished((e) ->{
                 try{
-                    fxml = FXMLLoader.load(getClass().getResource("/FXML/signupMenu.fxml"));
+                    fxml = FXMLLoader.load(getClass().getResource("/FXML/user/signupMenu.fxml"));
                     vbox.getChildren().removeAll();
                     vbox.getChildren().setAll(fxml);
                 }catch(IOException ex){

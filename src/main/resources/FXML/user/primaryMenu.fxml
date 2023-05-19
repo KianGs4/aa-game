@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="571.0" prefWidth="807.0" styleClass="parent" stylesheets="@../CSS/profileStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.PrimaryMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="571.0" prefWidth="807.0" styleClass="parent" stylesheets="@../../CSS/profileStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.PrimaryMenuController">
    <children>
       <VBox layoutY="-3.0" prefHeight="578.0" prefWidth="215.0" styleClass="pane">
          <children>
@@ -59,12 +59,12 @@
       </VBox>
       <ImageView fitHeight="571.0" fitWidth="593.0" layoutX="215.0" layoutY="-3.0">
          <image>
-            <Image url="@../CSS/aa.png" />
+            <Image url="@../../CSS/aa.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="585.0" fitWidth="599.0" layoutX="209.0" layoutY="-10.0">
          <image>
-            <Image url="@../CSS/aa.png" />
+            <Image url="@../../CSS/aa.png" />
          </image>
       </ImageView>
    </children>

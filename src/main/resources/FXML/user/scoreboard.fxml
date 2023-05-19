@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="571.0" prefWidth="807.0" styleClass="pane-1" stylesheets="@../CSS/scoreboard.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ScoreBoardMenuController">
+<AnchorPane prefHeight="571.0" prefWidth="807.0" styleClass="pane-1" stylesheets="@../../CSS/scoreboard.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ScoreBoardMenuController">
    <children>
       <Pane layoutX="156.0" layoutY="97.0" prefHeight="102.0" prefWidth="496.0" styleClass="pane-2">
          <children>
