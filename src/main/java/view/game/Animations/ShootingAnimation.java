@@ -25,6 +25,7 @@ public class ShootingAnimation extends Transition {
         double y = shootingBall.getLayoutY() - 10 ;
         if (shootingBall.getBoundsInParent().intersects(centralBall.getBoundsInParent())) {
             centralBall.addBall(shootingBall);
+            shootingBall.makeLine(centralBall, gameMenu.pane);
             gameMenu.setRotation(shootingBall);
             this.stop();
         }

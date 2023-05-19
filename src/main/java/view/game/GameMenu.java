@@ -33,8 +33,8 @@ public class GameMenu extends Application {
 
     private Game game;
 
-    @FXML
-    private Pane pane;
+
+    public Pane pane;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -46,10 +46,9 @@ public class GameMenu extends Application {
         pane.getChildren().add(game.getSecondCentralBall());
         Scene scene = new Scene(pane);
         stage.setScene(scene);
-        pane.getChildren().get(1).requestFocus();
+    //    pane.getChildren().get(1).requestFocus();
         pane.getChildren().get(1).setVisible(false);
         stage.show();
-        //  setRotation();
         createBall();
     }
 
@@ -72,7 +71,6 @@ public class GameMenu extends Application {
         shootingAnimation.play();
         game.shoot();
         pane.getChildren().add(game.getShootingBalls().get(1));
-        System.out.println("object in pane " + pane.getChildren().size());
         game.getShootingBalls().get(0).moveToShoot();
 
     }
@@ -87,15 +85,17 @@ public class GameMenu extends Application {
 
     private void rotateInPhase1(ShootingBall shootingBall) {
 
-        Rotate earthRotate = new Rotate();
-        System.out.println(shootingBall.getLayoutY());
-        earthRotate.setPivotY(game.getSecondCentralBall().getCenterY() - shootingBall.getLayoutY());
-        earthRotate.setPivotX(0);
-        shootingBall.getTransforms().add(earthRotate);
+        Rotate rotation = new Rotate();
+        rotation.setPivotY(game.getSecondCentralBall().getCenterY() - shootingBall.getLayoutY());
+        rotation.setPivotX(0);
+        shootingBall.getTransforms().add(rotation);
+
+
         Timeline earthTimeline = new Timeline(
-                new KeyFrame(Duration.ZERO, new KeyValue(earthRotate.angleProperty(), 0)),
-                new KeyFrame(Duration.seconds(2), new KeyValue(earthRotate.angleProperty(), 360))
+                new KeyFrame(Duration.ZERO, new KeyValue(rotation.angleProperty(), 0)),
+                new KeyFrame(Duration.seconds(2), new KeyValue(rotation.angleProperty(), 360))
         );
+
         earthTimeline.setCycleCount(Timeline.INDEFINITE);
         earthTimeline.play();
 
