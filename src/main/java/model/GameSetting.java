@@ -4,7 +4,7 @@ package model;
 import javafx.scene.input.KeyCode;
 
 public class GameSetting {
-
+    //TODO change statics to object method
     private static String difficulty;
     private static String language;
     private static boolean BW_mode;

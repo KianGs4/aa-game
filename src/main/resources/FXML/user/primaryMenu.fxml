@@ -12,7 +12,7 @@
    <children>
       <VBox layoutY="-3.0" prefHeight="578.0" prefWidth="215.0" styleClass="pane">
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="71.0" prefWidth="215.0" text="new game" textFill="WHITE">
+            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="71.0" prefWidth="215.0" text="new game" textFill="WHITE" onMouseClicked="#goToGame">
                <graphic>
                   <FontAwesomeIcon fill="WHITE" glyphName="PLAY" size="15" />
                </graphic>

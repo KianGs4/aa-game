@@ -3,6 +3,9 @@ package view.user;
 import javafx.scene.input.MouseEvent;
 import model.User;
 import view.Main;
+import view.game.GameMenu;
+
+import java.io.IOException;
 
 public class PrimaryMenuController {
     public static User currentUser;
@@ -24,5 +27,9 @@ public class PrimaryMenuController {
 
     public void goToSetting(MouseEvent mouseEvent) throws Exception {
         new SettingMenu().start(Main.stage);
+    }
+
+    public void goToGame(MouseEvent mouseEvent) throws IOException {
+        new GameMenu().start(Main.stage);
     }
 }

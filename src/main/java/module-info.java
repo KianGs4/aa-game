@@ -9,4 +9,6 @@ module AA {
     opens model to com.google.gson;
     exports view.user;
     opens view.user to javafx.fxml;
+    exports view.game;
+    opens view.game to javafx.fxml;
 }

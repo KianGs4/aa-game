@@ -23,13 +23,14 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         DataBase.load();
         Main.stage = stage;
+        stage.setTitle("aa game");
         URL url = Main.class.getResource("/FXML/user/main.fxml");
         assert url != null;
         AnchorPane anchorPane = FXMLLoader.load(url);
         Scene scene = new Scene(anchorPane);
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
-        stage.initStyle(StageStyle.UTILITY);
+//        stage.initStyle(StageStyle.UTILITY);
         stage.show();
     }
 }
