@@ -13,6 +13,9 @@ public class Game {
     private Phase phase;
     private final CentralBall firstCentralBall;
     private final CentralBall secondCentralBall;
+    private  double rotateSpeed;
+    private  double windSpeed;
+    private  int freezeTime;
 
     private final ArrayList<ShootingBall> shootingBalls = new ArrayList<>();
 
@@ -26,6 +29,27 @@ public class Game {
         secondCentralBall = new CentralBall((double) 850 /2, (double) 420 /2, 240);
         firstCentralBall = makeFirstCentralBall(secondCentralBall);
         createBalls(numberOfBalls);
+        getConstnats();
+    }
+
+    private void getConstnats() {
+        switch (GameSetting.getDifficulty()) {
+            case "Easy":
+                rotateSpeed = 2.5;
+                windSpeed= 1.2;
+                freezeTime = 7;
+                break;
+            case "Medium":
+                rotateSpeed = 1.25;
+                windSpeed= 1.5;
+                freezeTime = 5;
+                break;
+            case "Hard":
+                rotateSpeed = 0.83;
+                windSpeed= 1.8;
+                freezeTime = 3;
+                break;
+        }
     }
 
     private void createBalls(int currentBalls) {
@@ -69,5 +93,25 @@ public class Game {
     public void shoot() {
         currentBalls --;
         shootingBalls.remove(0);
+    }
+
+    public double getRotateSpeed() {
+        return rotateSpeed;
+    }
+
+    public double getWindSpeed() {
+        return windSpeed;
+    }
+
+    public int getFreezeTime() {
+        return freezeTime;
+    }
+
+    public int getNumberOfBalls() {
+        return numberOfBalls;
+    }
+
+    public void setPhase(Phase phase) {
+        this.phase = phase;
     }
 }
