@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.*;
 import view.Main;
+import view.game.Animations.IncreaseBallRadiusAnimation;
 import view.game.Animations.LooseGameAnimation;
 import view.game.Animations.ShootingAnimation;
 import view.user.PrimaryMenu;
@@ -140,6 +141,7 @@ public class GameMenu extends Application {
                 rotateInPhase1(shootingBall);
                 break;
             case PHASE_2:
+                new IncreaseBallRadiusAnimation(game.getSecondCentralBall()).play();
                 rotateInPhase2(shootingBall);
         }
     }
@@ -184,8 +186,8 @@ public class GameMenu extends Application {
         addRotation(shootingBall, circleRotationPhase2);
         Timeline circleRotationPhase2TimeLine = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(circleRotationPhase2.angleProperty(), 0)),
-                new KeyFrame(Duration.seconds(4), new KeyValue(circleRotationPhase2.angleProperty(), 420 * (4 / game.getRotateSpeed()))),
-                new KeyFrame(Duration.seconds(8), new KeyValue(circleRotationPhase2.angleProperty(), 0)),
+                new KeyFrame(Duration.seconds(8), new KeyValue(circleRotationPhase2.angleProperty(), 420 * (4 / game.getRotateSpeed()))),
+                new KeyFrame(Duration.seconds(16), new KeyValue(circleRotationPhase2.angleProperty(), 0)),
                 new KeyFrame(Duration.ZERO, actionEvent -> {
                     for (ShootingBall shootingBallSelected : game.getSecondCentralBall().getBalls()) {
                         if (shootingBallSelected.equals(shootingBall)) continue;
