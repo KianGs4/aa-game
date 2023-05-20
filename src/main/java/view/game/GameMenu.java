@@ -1,11 +1,13 @@
 package view.game;
 
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -22,9 +24,12 @@ import view.game.Animations.*;
 import view.user.PrimaryMenu;
 
 import java.io.IOException;
+import java.net.URL;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class GameMenu extends Application {
+public class GameMenu extends Application  {
 
     public Text scoreInView;
     private Game game;
@@ -39,24 +44,44 @@ public class GameMenu extends Application {
     private int currentScore = 0;
     public int wind = 0;
 
-    private ArrayList<Timeline> rotations = new ArrayList<>();
+    private final ArrayList<Timeline> rotations = new ArrayList<>();
+    private final Time time = new Time("0:0");
+    private Timeline passingTime = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+        if (time.getSecondsLeft() > 120) {
+            try {
+                hasContinue = false;
+                endGameSituation();
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+        time.oneSecondPassed();
+        ((Text)pane.getChildren().get(6)).setText(time.getCurrentTime());
+    }));
 
     @Override
     public void start(Stage stage) throws IOException {
         Pane pane = FXMLLoader.load(Main.class.getResource("/FXML/game/gameMenu.fxml"));
         this.pane = pane;
         scoreInView = (Text) pane.getChildren().get(1);
-
         game = new Game(GameSetting.getShootKey(), GameSetting.getFrozenKey(), GameSetting.getNumberOfBalls());
         pane.getChildren().add(game.getFirstCentralBall());
         pane.getChildren().add(game.getSecondCentralBall());
         pane.getStylesheets().add(Main.class.getResource("/CSS/style1.css").toString());
         Scene scene = new Scene(pane);
         stage.setScene(scene);
-        //    pane.getChildren().get(1).requestFocus();
-        pane.getChildren().get(5).setVisible(false);
+        setGameTime();
+        pane.getChildren().get(8).setVisible(false);
+        updateRemainingBall();
         stage.show();
         shootHandling();
+    }
+
+    private void setGameTime() {
+        ((Text)pane.getChildren().get(6)).setText(time.getCurrentTime());
+        passingTime.setCycleCount(Animation.INDEFINITE);
+        passingTime.play();
+
     }
 
     private void shootHandling() {
@@ -112,10 +137,19 @@ public class GameMenu extends Application {
         if (!hasContinue) stopRotations();
         if (game.getCurrentBalls() >= 2) createBall(game.getShootingBalls().get(1));
         if (game.getCurrentBalls() >= 1) game.getShootingBalls().get(0).moveToShoot();
-        addScore();
+        updateSituation();
         scoreInView.setText(Integer.valueOf(currentScore).toString());
         checkPhaseSituation();
 
+    }
+
+    private void updateSituation() {
+        addScore();
+        updateRemainingBall();
+    }
+
+    private void updateRemainingBall() {
+        ((Text) pane.getChildren().get(5)).setText(Integer.valueOf(game.getCurrentBalls()).toString());
     }
 
     private void addScore() {
@@ -138,7 +172,7 @@ public class GameMenu extends Application {
     }
 
     private void checkPhaseSituation() {
-        if (game.getCurrentBalls() == 3) changeColorToBlue();
+        if (game.getCurrentBalls() == 3 && !GameSetting.isBW_mode()) changeColorToBlue();
         switch (game.getPhase()) {
             case PHASE_1:
                 if (4 * game.getCurrentBalls() < game.getNumberOfBalls() * 3) {
@@ -175,7 +209,7 @@ public class GameMenu extends Application {
         }
         if (phase.equals(Phase.PHASE_3)) {
             new VisibilityModeAnimation(game.getSecondCentralBall()).play();
-            pane.getStyleClass().add("yellow-pane");
+            if (!GameSetting.isBW_mode()) pane.getStyleClass().add("yellow-pane");
         }
 
     }
@@ -272,14 +306,17 @@ public class GameMenu extends Application {
 
     public void endGameSituation() throws Exception {
         if (pane.getStyleClass().size() >= 2) pane.getStyleClass().remove(1);
-
+        passingTime.stop();
         stopRotations();
-        if (!hasContinue) {
-            LooseGameAnimation looseGameAnimation = new LooseGameAnimation(pane);
-            looseGameAnimation.play();
-        } else pane.getStyleClass().add("green-pane");
+        if (!GameSetting.isBW_mode()) {
+            if (!hasContinue) {
+                LooseGameAnimation looseGameAnimation = new LooseGameAnimation(pane);
+                looseGameAnimation.play();
+            } else pane.getStyleClass().add("green-pane");
+        }
         if (currentScore >= currentPlayer.getHighScore()) {
             currentPlayer.setHighScore(currentScore);
+            currentPlayer.setInfo(GameSetting.getDifficulty(),time.getSecondsLeft());
             DataBase.getInstance().updateData();
             DataBase.getInstance().updateRankings();
         }
@@ -311,5 +348,6 @@ public class GameMenu extends Application {
     public Game getGame() {
         return game;
     }
+
 }
 

@@ -64,6 +64,10 @@
                         <Font name="System Bold" size="26.0" />
                      </font>
                   </Text>
+                  <Button layoutX="379.0" layoutY="14.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="62.0" text="Default" onMouseClicked="#DefaultMode" />
+                  <Button layoutX="451.0" layoutY="14.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="62.0" text="Hard" onMouseClicked="#HardMode" />
+                  <Button layoutX="524.0" layoutY="14.0" mnemonicParsing="false" text="Medium" onMouseClicked="#MediumMode" />
+                  <Button layoutX="597.0" layoutY="13.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="62.0" text="Easy" onMouseClicked="#EasyMode" />
                </children>
             </Pane>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="666.0" styleClass="gold">

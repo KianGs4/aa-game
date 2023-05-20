@@ -28,6 +28,8 @@ public class ScoreBoardMenuController implements Initializable {
     public Circle showCircle_currentUser;
     public VBox vBox;
     public Button back;
+    private int showMode = 0;
+    private  int indexShow = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -41,23 +43,34 @@ public class ScoreBoardMenuController implements Initializable {
         username.setText(currentUser.getUsername());
         userPoint.setText(Integer.valueOf(currentUser.getHighScore()).toString());
         showCircle_currentUser.setFill(new ImagePattern(img));
-        int index = 0;
+        showNodes();
+    }
+
+    private void showNodes() {
+         indexShow = 0;
         for (Node hBox : vBox.getChildren()) {
             if (hBox instanceof HBox) {
-                loadNode(hBox, index);
-                index++;
+                loadNode(hBox);
+                indexShow++;
             }
         }
     }
 
-    private void loadNode(Node node, int index) {
+    private void loadNode(Node node) {
         ObservableList<Node> children = ((HBox) node).getChildren();
-        if (index < DataBase.getInstance().getUserRankings().size()) {
-            User user = DataBase.getInstance().getUserRankings().get(index);
-            addUserToRanking(children,user);
+        if (indexShow < DataBase.getInstance().getUserRankings().size()) {
+            User user = DataBase.getInstance().getUserRankings().get(indexShow);
+            if (showMode == 0 || showMode == user.getDifficultyOfScore()) {
+                addUserToRanking(children, user);
+                node.setVisible(true);
+            } else {
+                indexShow++;
+                loadNode(node);
+            }
             if (user.equals(PrimaryMenuController.currentUser) ||
-                    (index == 5 && (DataBase.getInstance().getUserRank(PrimaryMenuController.currentUser) >= 6)) )
+                    (indexShow == 5 && (DataBase.getInstance().getUserRank(PrimaryMenuController.currentUser) >= 6)))
                 showCurrentUser(node);
+            else node.getStyleClass().remove("current-user-in-scoreboard");
         } else {
             node.setVisible(false);
         }
@@ -70,7 +83,6 @@ public class ScoreBoardMenuController implements Initializable {
     }
 
     private void showCurrentUser(Node node) {
-        node.getStyleClass().removeAll();
         ((HBox) node).getStylesheets().add(getClass().getResource("/CSS/scoreboard.css").toString());
         ((HBox) node).getStyleClass().add("current-user-in-scoreboard");
     }
@@ -82,6 +94,27 @@ public class ScoreBoardMenuController implements Initializable {
         ((Circle) children.get(1)).setFill(new ImagePattern(img));
         ((Label) children.get(2)).setText(user.getUsername());
         ((Text) children.get(3)).setText(Integer.valueOf(user.getHighScore()).toString());
+    }
+
+    public void DefaultMode(MouseEvent mouseEvent) {
+        showMode = 0;
+        showNodes();
+    }
+
+    public void MediumMode(MouseEvent mouseEvent) {
+        showMode = 2;
+        showNodes();
+
+    }
+
+    public void EasyMode(MouseEvent mouseEvent) {
+        showMode = 1;
+        showNodes();
+    }
+
+    public void HardMode(MouseEvent mouseEvent) {
+        showMode = 3;
+        showNodes();
     }
 }
 

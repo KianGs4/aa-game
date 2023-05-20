@@ -6,22 +6,37 @@
 
 <Pane fx:id="pane" prefHeight="750.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.game.GameMenu">
    <children>
-      <Text fill="#0b0b0b" layoutX="607.0" layoutY="660.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" textAlignment="CENTER">
+      <Text fill="#0b0b0b" layoutX="26.0" layoutY="668.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" textAlignment="CENTER">
          <font>
             <Font name="Berlin Sans FB" size="31.0" />
          </font>
       </Text>
-      <Text fill="#0b0b0b" layoutX="698.0" layoutY="663.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="127.3121337890625">
+      <Text fill="#0b0b0b" layoutX="117.0" layoutY="671.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="127.3121337890625">
          <font>
             <Font name="Berlin Sans FB" size="31.0" />
          </font>
       </Text>
-      <Text fill="#0b0b0b" layoutX="23.0" layoutY="661.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wind:" textAlignment="CENTER">
+      <Text fill="#0b0b0b" layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wind:" textAlignment="CENTER">
          <font>
             <Font name="Berlin Sans FB" size="31.0" />
          </font>
       </Text>
-      <Text fill="#0b0b0b" layoutX="105.0" layoutY="664.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-0-" textAlignment="CENTER" wrappingWidth="95.3121337890625">
+      <Text fill="#0b0b0b" layoutX="96.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-0-" textAlignment="CENTER" wrappingWidth="95.3121337890625">
+         <font>
+            <Font name="Berlin Sans FB" size="31.0" />
+         </font>
+      </Text>
+      <Text fill="#0b0b0b" layoutX="14.0" layoutY="718.0" strokeType="OUTSIDE" strokeWidth="0.0" text="remaining balls" textAlignment="CENTER" wrappingWidth="224.9121170043946">
+         <font>
+            <Font name="Berlin Sans FB" size="31.0" />
+         </font>
+      </Text>
+      <Text fill="#0b0b0b" layoutX="239.0" layoutY="718.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="95.3121337890625">
+         <font>
+            <Font name="Berlin Sans FB" size="31.0" />
+         </font>
+      </Text>
+      <Text fill="#0b0b0b" layoutX="611.0" layoutY="660.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time" textAlignment="CENTER" wrappingWidth="224.9121170043946">
          <font>
             <Font name="Berlin Sans FB" size="31.0" />
          </font>

@@ -54,17 +54,21 @@ public class DataBase {
         users.put(user.getUsername(), user);
         userRankings.add(user);
     }
+
     public void removeGuests() {
-        for (User user : users.values() ) {
-            if(user.isGuest()) users.remove(user.getUsername());
+        for (User user : users.values()) {
+            if (user.isGuest()) users.remove(user.getUsername());
         }
     }
 
 
     public void updateRankings() {
         userRankings.sort((o1, o2) -> o1.getUsername().compareTo(o2.getUsername()));
+        userRankings.sort((o1, o2) -> o2.getTimeInfo() - o1.getTimeInfo());
         userRankings.sort(((o1, o2) -> o2.getHighScore() - o1.getHighScore()));
     }
+
+
 
     public int getUserRank(User user) {
         for (int i = 0; i < userRankings.size(); i++) {
