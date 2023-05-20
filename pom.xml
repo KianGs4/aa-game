@@ -41,8 +41,6 @@
             <artifactId>tritonus-share</artifactId>
             <version>0.3.7-1</version>
         </dependency>
-        <!-- Thanks for using https://jar-download.com -->
-
 
     </dependencies>
 

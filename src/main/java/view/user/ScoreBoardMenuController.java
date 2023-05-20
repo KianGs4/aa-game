@@ -29,7 +29,7 @@ public class ScoreBoardMenuController implements Initializable {
     public VBox vBox;
     public Button back;
     private int showMode = 0;
-    private  int indexShow = 0;
+    private int indexShow = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -47,7 +47,7 @@ public class ScoreBoardMenuController implements Initializable {
     }
 
     private void showNodes() {
-         indexShow = 0;
+        indexShow = 0;
         for (Node hBox : vBox.getChildren()) {
             if (hBox instanceof HBox) {
                 loadNode(hBox);
@@ -60,6 +60,10 @@ public class ScoreBoardMenuController implements Initializable {
         ObservableList<Node> children = ((HBox) node).getChildren();
         if (indexShow < DataBase.getInstance().getUserRankings().size()) {
             User user = DataBase.getInstance().getUserRankings().get(indexShow);
+            if (user.equals(PrimaryMenuController.currentUser))
+                showCurrentUser(node);
+             else node.getStyleClass().remove("current-user-in-scoreboard");
+
             if (showMode == 0 || showMode == user.getDifficultyOfScore()) {
                 addUserToRanking(children, user);
                 node.setVisible(true);
@@ -67,13 +71,9 @@ public class ScoreBoardMenuController implements Initializable {
                 indexShow++;
                 loadNode(node);
             }
-            if (user.equals(PrimaryMenuController.currentUser) ||
-                    (indexShow == 5 && (DataBase.getInstance().getUserRank(PrimaryMenuController.currentUser) >= 6)))
-                showCurrentUser(node);
-            else node.getStyleClass().remove("current-user-in-scoreboard");
-        } else {
+
+        } else
             node.setVisible(false);
-        }
 
 
     }
