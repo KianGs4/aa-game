@@ -1,6 +1,5 @@
 package view.game;
 
-import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -8,23 +7,21 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.*;
 import view.Main;
-import view.game.Animations.IncreaseBallRadiusAnimation;
-import view.game.Animations.LooseGameAnimation;
-import view.game.Animations.ShootingAnimation;
-import view.game.Animations.VisibilityModeAnimation;
+import view.game.Animations.*;
 import view.user.PrimaryMenu;
 
 import java.io.IOException;
-import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class GameMenu extends Application {
@@ -35,10 +32,12 @@ public class GameMenu extends Application {
 
 
     public Pane pane;
-    private boolean hasContinue = true;
+    public boolean hasContinue = true;
+    public boolean isClockWise = true;
 
     public static User currentPlayer;
     private int currentScore = 0;
+    public  int wind = 0;
 
     private ArrayList<Timeline> rotations = new ArrayList<>();
 
@@ -54,7 +53,7 @@ public class GameMenu extends Application {
         Scene scene = new Scene(pane);
         stage.setScene(scene);
         //    pane.getChildren().get(1).requestFocus();
-        pane.getChildren().get(3).setVisible(false);
+        pane.getChildren().get(5).setVisible(false);
         stage.show();
         shootHandling();
     }
@@ -76,8 +75,27 @@ public class GameMenu extends Application {
                         }
                     }
                 }
+                if (game.getPhase().equals(Phase.PHASE_4) && keyEvent.getCode().equals(KeyCode.LEFT))
+                    moveLeft();
+                if (game.getPhase().equals(Phase.PHASE_4) && keyEvent.getCode().equals(KeyCode.RIGHT))
+                    moveRight();
             }
         });
+    }
+
+    private void moveLeft() {
+        Circle ball = game.getShootingBalls().get(0).getBall();
+        if (!(ball.getCenterX() - ball.getRadius() - 15 < 0)){
+            ball.setCenterX(ball.getCenterX() - 10);
+            game.getShootingBalls().get(0).getText().setX(game.getShootingBalls().get(0).getText().getX() - 10);
+        }
+    }
+    private void moveRight() {
+        Circle ball = game.getShootingBalls().get(0).getBall();
+        if (!(ball.getCenterX() + ball.getRadius() + 15 > pane.getWidth())){
+            ball.setCenterX(ball.getCenterX() + 10);
+            game.getShootingBalls().get(0).getText().setX(game.getShootingBalls().get(0).getText().getX() + 10);
+        }
     }
 
     private void createBall(ShootingBall shootingBall) {
@@ -111,11 +129,12 @@ public class GameMenu extends Application {
         }
     }
 
-    private void stopRotations() {
+    public void stopRotations() {
         for (Timeline rotation : rotations) {
             rotation.stop();
         }
     }
+
     private void checkPhaseSituation() {
         switch (game.getPhase()) {
             case PHASE_1:
@@ -123,10 +142,16 @@ public class GameMenu extends Application {
                     game.setPhase(Phase.PHASE_2);
                     changePhase(game.getPhase());
                 }
+                break;
             case PHASE_2:
-                if ( 2* game.getCurrentBalls() < game.getNumberOfBalls()) {
+                if (2 * game.getCurrentBalls() < game.getNumberOfBalls()) {
                     game.setPhase(Phase.PHASE_3);
                     changePhase(game.getPhase());
+                }
+                break;
+            case PHASE_3:
+                if (4 * game.getCurrentBalls() < game.getNumberOfBalls()) {
+                    game.setPhase(Phase.PHASE_4);
                 }
         }
     }
@@ -140,7 +165,7 @@ public class GameMenu extends Application {
             for (ShootingBall shootingBall : game.getSecondCentralBall().getBalls())
                 rotateInPhase2(shootingBall);
         }
-        if (phase.equals(Phase.PHASE_3)){
+        if (phase.equals(Phase.PHASE_3)) {
             new VisibilityModeAnimation(game.getSecondCentralBall()).play();
         }
     }
@@ -153,6 +178,7 @@ public class GameMenu extends Application {
                 break;
             case PHASE_2:
             case PHASE_3:
+            case PHASE_4:
                 rotateInPhase2(shootingBall);
                 break;
         }
@@ -185,21 +211,24 @@ public class GameMenu extends Application {
                     }
                 })
         );
-        circleRotationPhase1TimeLine.setAutoReverse(false);
-        circleRotationPhase1TimeLine.setCycleCount(Timeline.INDEFINITE);
-        rotations.add(circleRotationPhase1TimeLine);
-        circleRotationPhase1TimeLine.play();
+        runTimeLine(circleRotationPhase1TimeLine);
     }
 
-    private void rotateInPhase2(ShootingBall shootingBall) {
+    public void rotateInPhase2(ShootingBall shootingBall) {
         Rotate circleRotationPhase2 = new Rotate();
         circleRotationPhase2.setPivotX(game.getSecondCentralBall().getCenterX());
         circleRotationPhase2.setPivotY(game.getSecondCentralBall().getCenterY());
         addRotation(shootingBall, circleRotationPhase2);
-        Timeline circleRotationPhase2TimeLine = new Timeline(
+        Timeline circleRotationPhase2TimeLine = createPhase2TimeLine(shootingBall, circleRotationPhase2);
+        runTimeLine(circleRotationPhase2TimeLine);
+    }
+
+    private Timeline createPhase2TimeLine(ShootingBall shootingBall, Rotate circleRotationPhase2) {
+        return new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(circleRotationPhase2.angleProperty(), 0)),
-                new KeyFrame(Duration.seconds(4), new KeyValue(circleRotationPhase2.angleProperty(), 380 * (4 / game.getRotateSpeed()))),
-                new KeyFrame(Duration.seconds(8), new KeyValue(circleRotationPhase2.angleProperty(), 0)),
+                new KeyFrame(Duration.seconds(6), new KeyValue(circleRotationPhase2.angleProperty(), 380 * (6 / game.getRotateSpeed()))),
+                new KeyFrame(Duration.seconds(12), new KeyValue(circleRotationPhase2.angleProperty(), 0)),
+
                 new KeyFrame(Duration.ZERO, actionEvent -> {
                     for (ShootingBall shootingBallSelected : game.getSecondCentralBall().getBalls()) {
                         if (shootingBallSelected.equals(shootingBall)) continue;
@@ -215,10 +244,13 @@ public class GameMenu extends Application {
                     }
                 })
         );
-        circleRotationPhase2TimeLine.setAutoReverse(false);
-        circleRotationPhase2TimeLine.setCycleCount(Timeline.INDEFINITE);
-        rotations.add(circleRotationPhase2TimeLine);
-        circleRotationPhase2TimeLine.play();
+    }
+
+    private void runTimeLine(Timeline timeline) {
+        timeline.setAutoReverse(false);
+        timeline.setCycleCount(-1);
+        rotations.add(timeline);
+        timeline.play();
     }
 
     private void addRotation(ShootingBall shootingBall, Rotate circleRotationPhase1) {
@@ -228,7 +260,7 @@ public class GameMenu extends Application {
     }
 
 
-    private void endGameSituation() throws Exception {
+    public void endGameSituation() throws Exception {
         stopRotations();
         pane.getStylesheets().add(Main.class.getResource("/CSS/style1.css").toString());
         if (!hasContinue) {
@@ -244,6 +276,7 @@ public class GameMenu extends Application {
 
     }
 
+    //TODO close handling
     private void runEndGameMenu(Stage stage) throws IOException {
         Pane pane = FXMLLoader.load(Main.class.getResource("/FXML/game/endGameShow.fxml"));
 
@@ -258,6 +291,14 @@ public class GameMenu extends Application {
     public void returnHome(MouseEvent mouseEvent) throws Exception {
         endGameStage.close();
         new PrimaryMenu().start(Main.stage);
+    }
+
+    public ArrayList<Timeline> getRotations() {
+        return rotations;
+    }
+
+    public Game getGame() {
+        return game;
     }
 }
 

@@ -14,22 +14,22 @@
       <Circle fx:id="circle" fill="#0b0b0b" layoutX="126.0" layoutY="115.0" radius="101.0" stroke="BLACK" strokeType="INSIDE" />
       <Text fill="WHITE" layoutX="249.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="username :">
          <font>
-            <Font name="Jokerman" size="30.0" />
+            <Font name="Berlin Sans FB" size="34.0" />
          </font>
       </Text>
       <Text fx:id="username" fill="WHITE" layoutX="429.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
          <font>
-            <Font name="Jokerman" size="30.0" />
+            <Font name="Berlin Sans FB" size="34.0" />
          </font>
       </Text>
       <Text fill="WHITE" layoutX="249.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="password:">
          <font>
-            <Font name="Jokerman" size="30.0" />
+            <Font name="Berlin Sans FB" size="34.0" />
          </font>
       </Text>
       <Text fx:id="password" fill="WHITE" layoutX="429.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
          <font>
-            <Font name="Jokerman" size="30.0" />
+            <Font name="Berlin Sans FB" size="34.0" />
          </font>
       </Text>
       <FontAwesomeIcon fill="WHITE" glyphName="EDIT" layoutX="768.0" layoutY="64.0" onMouseClicked="#changeUsername" size="25" />
@@ -37,7 +37,7 @@
       <TextField fx:id="changeBox" layoutX="142.0" layoutY="483.0" prefHeight="26.0" prefWidth="202.0" promptText="text" styleClass="tf_box" />
       <Text fx:id="defText" fill="WHITE" layoutX="14.0" layoutY="501.0" strokeType="OUTSIDE" strokeWidth="0.0" text="make your change : " wrappingWidth="174.39999999999998" />
       <Text fx:id="message" fill="WHITE" layoutX="142.0" layoutY="529.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <Button layoutX="38.0" layoutY="286.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="195.0" styleClass="button-1" text="Sign Out" onMouseClicked="#goToLoginMenu">
+      <Button layoutX="38.0" layoutY="286.0" mnemonicParsing="false" onMouseClicked="#goToLoginMenu" prefHeight="46.0" prefWidth="195.0" styleClass="button-1" text="Sign Out">
          <graphic>
             <FontAwesomeIcon fill="#fafafa" glyphName="SIGN_OUT" size="25" />
          </graphic>
@@ -45,7 +45,7 @@
             <Insets right="34.0" />
          </padding>
       </Button>
-      <Button layoutX="38.0" layoutY="240.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="195.0" styleClass="button-1" text="Home" onMouseClicked="#goToPrimaryMenu">
+      <Button layoutX="38.0" layoutY="240.0" mnemonicParsing="false" onMouseClicked="#goToPrimaryMenu" prefHeight="46.0" prefWidth="195.0" styleClass="button-1" text="Home">
          <graphic>
             <FontAwesomeIcon fill="WHITE" glyphName="HOME" size="25" />
          </graphic>
@@ -53,7 +53,7 @@
             <Insets right="50.0" />
          </padding>
       </Button>
-      <Button layoutX="38.0" layoutY="332.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="195.0" styleClass="button-2" text="Delete account" onMouseClicked="#showAlert">
+      <Button layoutX="38.0" layoutY="332.0" mnemonicParsing="false" onMouseClicked="#showAlert" prefHeight="46.0" prefWidth="195.0" styleClass="button-2" text="Delete account">
          <graphic>
             <FontAwesomeIcon fill="WHITE" glyphName="CLOSE" size="25" text="" />
          </graphic>

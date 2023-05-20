@@ -17,4 +17,14 @@ public class Utils {
         avatar += ".png";
         return avatar;
     }
+
+    public static int generateRandomWind(double windRate) {
+        double random = Math.random() * 10;
+        int sign = (int) (Math.random() * 2) ;
+        if (sign == 0) random *= -1;
+        random *= windRate;
+        if (random >= 15) random = 15;
+        else if (random <= -15) random = -15;
+        return (int) random;
+    }
 }
