@@ -50,5 +50,13 @@
 }
 
 .green-pane {
-    -fx-background-color: #00ff00;
+    -fx-background-color: #77FF00;
+}
+
+.blue-pane {
+    -fx-background-color: #2196f3;
+}
+
+.yellow-pane {
+    -fx-background-color: yellow;
 }

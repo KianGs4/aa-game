@@ -37,7 +37,7 @@ public class GameMenu extends Application {
 
     public static User currentPlayer;
     private int currentScore = 0;
-    public  int wind = 0;
+    public int wind = 0;
 
     private ArrayList<Timeline> rotations = new ArrayList<>();
 
@@ -50,6 +50,7 @@ public class GameMenu extends Application {
         game = new Game(GameSetting.getShootKey(), GameSetting.getFrozenKey(), GameSetting.getNumberOfBalls());
         pane.getChildren().add(game.getFirstCentralBall());
         pane.getChildren().add(game.getSecondCentralBall());
+        pane.getStylesheets().add(Main.class.getResource("/CSS/style1.css").toString());
         Scene scene = new Scene(pane);
         stage.setScene(scene);
         //    pane.getChildren().get(1).requestFocus();
@@ -85,14 +86,15 @@ public class GameMenu extends Application {
 
     private void moveLeft() {
         Circle ball = game.getShootingBalls().get(0).getBall();
-        if (!(ball.getCenterX() - ball.getRadius() - 15 < 0)){
+        if (!(ball.getCenterX() - ball.getRadius() - 15 < 0)) {
             ball.setCenterX(ball.getCenterX() - 10);
             game.getShootingBalls().get(0).getText().setX(game.getShootingBalls().get(0).getText().getX() - 10);
         }
     }
+
     private void moveRight() {
         Circle ball = game.getShootingBalls().get(0).getBall();
-        if (!(ball.getCenterX() + ball.getRadius() + 15 > pane.getWidth())){
+        if (!(ball.getCenterX() + ball.getRadius() + 15 > pane.getWidth())) {
             ball.setCenterX(ball.getCenterX() + 10);
             game.getShootingBalls().get(0).getText().setX(game.getShootingBalls().get(0).getText().getX() + 10);
         }
@@ -136,6 +138,7 @@ public class GameMenu extends Application {
     }
 
     private void checkPhaseSituation() {
+        if (game.getCurrentBalls() == 3) changeColorToBlue();
         switch (game.getPhase()) {
             case PHASE_1:
                 if (4 * game.getCurrentBalls() < game.getNumberOfBalls() * 3) {
@@ -156,6 +159,11 @@ public class GameMenu extends Application {
         }
     }
 
+    private void changeColorToBlue() {
+        pane.getStyleClass().remove(1);
+        pane.getStyleClass().add("blue-pane");
+    }
+
     private void changePhase(Phase phase) {
 
         if (phase.equals(Phase.PHASE_2)) {
@@ -167,7 +175,9 @@ public class GameMenu extends Application {
         }
         if (phase.equals(Phase.PHASE_3)) {
             new VisibilityModeAnimation(game.getSecondCentralBall()).play();
+            pane.getStyleClass().add("yellow-pane");
         }
+
     }
 
 
@@ -261,8 +271,9 @@ public class GameMenu extends Application {
 
 
     public void endGameSituation() throws Exception {
+        if (pane.getStyleClass().size() >= 2) pane.getStyleClass().remove(1);
+
         stopRotations();
-        pane.getStylesheets().add(Main.class.getResource("/CSS/style1.css").toString());
         if (!hasContinue) {
             LooseGameAnimation looseGameAnimation = new LooseGameAnimation(pane);
             looseGameAnimation.play();
