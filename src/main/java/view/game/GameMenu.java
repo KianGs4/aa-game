@@ -25,9 +25,7 @@ import view.user.PrimaryMenu;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 public class GameMenu extends Application  {
 
@@ -105,9 +103,18 @@ public class GameMenu extends Application  {
                     moveLeft();
                 if (game.getPhase().equals(Phase.PHASE_4) && keyEvent.getCode().equals(KeyCode.RIGHT))
                     moveRight();
+                if (keyEvent.getCode().equals(KeyCode.P)) {
+                    try {
+                        pauseSituation();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             }
         });
     }
+
+
 
     private void moveLeft() {
         Circle ball = game.getShootingBalls().get(0).getBall();
@@ -339,6 +346,14 @@ public class GameMenu extends Application  {
     public void returnHome(MouseEvent mouseEvent) throws Exception {
         endGameStage.close();
         new PrimaryMenu().start(Main.stage);
+    }
+
+    private void pauseSituation() throws Exception {
+        for (Timeline timeline: rotations) {
+            timeline.pause();
+        }
+        Stage stage = new Stage();
+        new PauseMenu().start(stage);
     }
 
     public ArrayList<Timeline> getRotations() {

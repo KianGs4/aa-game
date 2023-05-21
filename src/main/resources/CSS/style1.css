@@ -60,3 +60,7 @@
 .yellow-pane {
     -fx-background-color: yellow;
 }
+
+.pause-pane {
+    -fx-background-color:  #151928 ;
+}
