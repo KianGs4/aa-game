@@ -37,10 +37,11 @@
 
 
         <dependency>
-            <groupId>com.googlecode.soundlibs</groupId>
-            <artifactId>tritonus-share</artifactId>
-            <version>0.3.7-1</version>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>21-ea+5</version>
         </dependency>
+
 
     </dependencies>
 

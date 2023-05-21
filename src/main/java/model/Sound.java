@@ -1,8 +1,10 @@
 package model;
 
 import java.net.URL;
+import javafx.sound.
 
 public class Sound {
+    Clip clip
 //    Clip clip;
 //    private static final URL[] soundtracks = new URL[30];
 //
