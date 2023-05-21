@@ -34,11 +34,13 @@ public class EndGameMenu extends Application {
     }
 
     public void returnHome(MouseEvent mouseEvent) throws Exception {
+        PrimaryMenu.mainSound.stop();
         new PrimaryMenu().start(Main.stage);
         endGameStage.close();
     }
 
     public void returnHome(Stage stage) throws Exception {
+        PrimaryMenu.mainSound.stop();
         new PrimaryMenu().start(Main.stage);
         endGameStage.close();
     }

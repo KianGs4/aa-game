@@ -42,12 +42,13 @@ public class PauseMenu extends Application {
         toggleSwitch.setTranslateX(70);
         toggleSwitch.setTranslateY(325);
         anchorPane.getChildren().add(toggleSwitch);
+        if (GameSetting.getSound()) toggleSwitch.setSwitchedOn(true);
         stage.setTitle("aa game");
         stage.show();
         stage.setOnCloseRequest(windowEvent -> backToGame(stage));
     }
 
-    static  {
+    static {
         shootText = new Text("Shoot: " + GameSetting.getShootKey().getName());
         shootText.setTranslateX(32);
         shootText.setTranslateY(100);
@@ -66,6 +67,10 @@ public class PauseMenu extends Application {
 
 
     public void backToGame(MouseEvent mouseEvent) {
+        if (!((ToggleSwitch) pausePane.getChildren().get(7)).switchedOnProperty()){
+            PrimaryMenu.mainSound.stop();
+            GameSetting.setSound(false);
+        } else PrimaryMenu.mainSound.play();
         gameMenu.resumeGame();
         logout(pauseStage);
     }
@@ -98,8 +103,8 @@ public class PauseMenu extends Application {
 
     public void showKeys(MouseEvent mouseEvent) {
         if (pausePane.getChildren().get(3).isVisible())
-           goToInfoMode();
-         else  goToMainPauseMode();
+            goToInfoMode();
+        else goToMainPauseMode();
     }
 
     private void goToInfoMode() {
@@ -110,6 +115,7 @@ public class PauseMenu extends Application {
         pausePane.getChildren().add(shootText);
         pausePane.getChildren().add(freezeText);
     }
+
     private void goToMainPauseMode() {
         pausePane.getChildren().get(3).setVisible(true);
         pausePane.getChildren().get(4).setVisible(true);

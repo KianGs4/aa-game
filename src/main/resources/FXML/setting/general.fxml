@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <Pane prefHeight="454.5" prefWidth="586.4" styleClass="pane" stylesheets="@../../CSS/setting.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.user.SettingMenuController">
    <children>
-      <ChoiceBox layoutX="330.0" layoutY="166.0" prefHeight="39.0" prefWidth="178.0" onAction="#changeLanguage" fx:id="languageBox" />
+      <ChoiceBox fx:id="languageBox" layoutX="330.0" layoutY="166.0" onAction="#changeLanguage" prefHeight="39.0" prefWidth="178.0" />
       <Text fill="WHITE" layoutX="61.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sound :" wrappingWidth="231.63592529296875">
          <font>
             <Font name="Berlin Sans FB" size="48.0" />
@@ -21,13 +20,15 @@
             <Font name="Berlin Sans FB" size="48.0" />
          </font>
       </Text>
-      <RadioButton layoutX="61.0" layoutY="295.0" mnemonicParsing="false" text="Black and White Mode " textFill="WHITE" onAction="#selectBWmode" fx:id="mode">
+      <RadioButton fx:id="mode" layoutX="61.0" layoutY="295.0" mnemonicParsing="false" onAction="#selectBWmode" text="Black and White Mode " textFill="WHITE">
          <font>
             <Font size="21.0" />
          </font>
       </RadioButton>
-      <Slider layoutX="279.0" layoutY="55.0" max="20.0" />
-      <FontAwesomeIcon fill="WHITE" glyphName="CIRCLE" layoutX="419.0" layoutY="69.0" size="20" />
-      <FontAwesomeIcon fill="WHITE" glyphName="CIRCLE" layoutX="258.0" layoutY="69.0" size="20" />
+      <ToggleButton fx:id="soundButton" layoutX="243.0" layoutY="40.0" mnemonicParsing="false" onMouseClicked="#changeSound" prefHeight="36.0" prefWidth="77.0" styleClass="button-1" text="On">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </ToggleButton>
    </children>
 </Pane>

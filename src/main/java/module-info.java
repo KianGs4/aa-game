@@ -2,6 +2,7 @@ module AA {
     requires javafx.controls;
     requires javafx.fxml;
     requires com.google.gson;
+    requires javafx.media;
 
     exports view;
     opens view to javafx.fxml;

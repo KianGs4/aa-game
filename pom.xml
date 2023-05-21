@@ -39,8 +39,9 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-media</artifactId>
-            <version>21-ea+5</version>
+            <version>19.0.2</version>
         </dependency>
+
 
 
     </dependencies>

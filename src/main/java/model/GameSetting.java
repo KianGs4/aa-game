@@ -9,7 +9,7 @@ public class GameSetting {
     private static String language;
     private static boolean BW_mode;
     private static int numberOfBalls;
-    private static int sound;
+    private static boolean sound;
     private static KeyCode shootKey;
     private static KeyCode frozenKey;
 
@@ -19,7 +19,7 @@ public class GameSetting {
         language = "English";
         BW_mode = false;
         numberOfBalls = 10;
-        sound = 10;
+        sound = true;
         shootKey = KeyCode.SPACE;
         frozenKey = KeyCode.TAB;
     }
@@ -49,7 +49,7 @@ public class GameSetting {
         return frozenKey;
     }
 
-    public static int getSound() {
+    public static boolean getSound() {
         return sound;
     }
 
@@ -77,7 +77,7 @@ public class GameSetting {
         GameSetting.numberOfBalls = numberOfBalls;
     }
 
-    public static void setSound(int sound) {
+    public static void setSound(Boolean sound) {
         GameSetting.sound = sound;
     }
 }

@@ -26,6 +26,7 @@ public class SettingMenuController implements Initializable {
     public ChoiceBox languageBox, difficultyBox;
     public Button shootButton;
     public Button freezeButton;
+    public ToggleButton soundButton;
 
     //TODO Handle close and save option
     //TODO make more CSS
@@ -110,7 +111,7 @@ public class SettingMenuController implements Initializable {
         Pane samplePane = (Pane) pane.getChildren().get(0);
         ((ChoiceBox) samplePane.getChildren().get(0)).getItems().addAll("English", "Persian");
         ((ChoiceBox) samplePane.getChildren().get(0)).setValue(GameSetting.getLanguage());
-        ((Slider) samplePane.getChildren().get(4)).setValue(GameSetting.getSound());
+        ((ToggleButton) samplePane.getChildren().get(4)).setText((GameSetting.getSound()) ? "On" : "Off");
         ((RadioButton) samplePane.getChildren().get(3)).setSelected((GameSetting.isBW_mode()));
 
 
@@ -164,5 +165,10 @@ public class SettingMenuController implements Initializable {
                 }
             }
         });
+    }
+
+    public void changeSound(MouseEvent mouseEvent) {
+        GameSetting.setSound(!GameSetting.getSound());
+        soundButton.setText((GameSetting.getSound()) ? "On" : "Off");
     }
 }

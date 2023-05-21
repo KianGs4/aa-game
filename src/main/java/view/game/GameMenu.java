@@ -75,6 +75,10 @@ public class GameMenu extends Application {
         pane.getChildren().get(8).setVisible(false);
         updateRemainingBall();
         if (GameSetting.getLanguage().equals("Persian"))translate(pane);
+        if (GameSetting.getSound()) {
+            PrimaryMenu.mainSound.play();
+            PrimaryMenu.mainSound.loop();
+        }
         stage.show();
         shootHandling();
     }
@@ -102,7 +106,10 @@ public class GameMenu extends Application {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode().equals(game.getShoot())) {
-                    if (game.getCurrentBalls() >= 1 && hasContinue) shootAction();
+                    if (game.getCurrentBalls() >= 1 && hasContinue){
+                        new Sound(2).play();
+                        shootAction();
+                    }
                     else {
                         try {
                             endGameSituation();
@@ -336,6 +343,8 @@ public class GameMenu extends Application {
             if (!hasContinue) {
                 LooseGameAnimation looseGameAnimation = new LooseGameAnimation(pane);
                 looseGameAnimation.play();
+                PrimaryMenu.mainSound.stop();
+                new Sound(1).play();
             } else pane.getStyleClass().add("green-pane");
         }
         if (currentScore >= currentPlayer.getHighScore()) {

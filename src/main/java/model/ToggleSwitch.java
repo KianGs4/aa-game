@@ -23,8 +23,8 @@ public class ToggleSwitch extends Parent {
     private ParallelTransition animation = new ParallelTransition(translateAnimation, fillAnimation);
 
 
-    public BooleanProperty switchedOnProperty() {
-        return switchedOn;
+    public Boolean switchedOnProperty() {
+        return switchedOn.getValue();
     }
 
     public ToggleSwitch() {
@@ -61,5 +61,9 @@ public class ToggleSwitch extends Parent {
         setOnMouseClicked(event -> {
             switchedOn.set(!switchedOn.get());
         });
+    }
+
+    public void setSwitchedOn(boolean switchedOn) {
+        this.switchedOn.set(switchedOn);
     }
 }
