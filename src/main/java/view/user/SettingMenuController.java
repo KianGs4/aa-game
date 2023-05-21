@@ -9,7 +9,10 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import model.GameSetting;
 import view.Main;
@@ -31,6 +34,7 @@ public class SettingMenuController implements Initializable {
 
     @FXML
     private Text ballsValue;
+
     @FXML
     private Pane pane;
 
@@ -38,12 +42,35 @@ public class SettingMenuController implements Initializable {
     private Parent fxml;
     public Slider slider;
 
+    public AnchorPane mainPane;
+
+    public SettingMenuController() {
+
+    }
+
+    public SettingMenuController(AnchorPane pane) {
+        this.mainPane = pane;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
     public void back(MouseEvent mouseEvent) throws Exception {
         new PrimaryMenu().start(Main.stage);
+    }
+
+    public void translate() {
+        VBox vBox = (VBox) mainPane.getChildren().get(0);
+        HBox hBox = (HBox) mainPane.getChildren().get(1);
+        ((Text) vBox.getChildren().get(0)).setText("تنظیمات");
+        ((Button) vBox.getChildren().get(1)).setText("عمومی");
+        ((Button) vBox.getChildren().get(2)).setText("نقشه ها");
+        ((Button) vBox.getChildren().get(3)).setText("بازی");
+        ((Button) vBox.getChildren().get(4)).setText("خانه");
+        ((Button) hBox.getChildren().get(0)).setText("کمک");
+        ((Button) hBox.getChildren().get(1)).setText("لغو");
+        ((Button) hBox.getChildren().get(2)).setText("ذخیره");
     }
 
     public void openGameSetting(MouseEvent mouseEvent) {

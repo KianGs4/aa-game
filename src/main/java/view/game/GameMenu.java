@@ -74,8 +74,16 @@ public class GameMenu extends Application {
         setGameTime();
         pane.getChildren().get(8).setVisible(false);
         updateRemainingBall();
+        if (GameSetting.getLanguage().equals("Persian"))translate(pane);
         stage.show();
         shootHandling();
+    }
+
+    private void translate(Pane pane){
+        ((Text) pane.getChildren().get(0)).setText("امتیاز");
+        ((Text) pane.getChildren().get(2)).setText("باد");
+        ((Text) pane.getChildren().get(4)).setText("تعداد توپ باقی مانده");
+
     }
 
     private void setGameTime() {

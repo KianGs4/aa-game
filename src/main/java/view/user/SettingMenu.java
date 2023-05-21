@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.GameSetting;
 
 import java.net.URL;
 
@@ -16,6 +17,7 @@ public class SettingMenu extends Application {
         AnchorPane anchorPane = FXMLLoader.load(url);
         Scene scene = new Scene(anchorPane);
         stage.setScene(scene);
+        if (GameSetting.getLanguage().equals("Persian")) new SettingMenuController(anchorPane).translate();
         stage.show();
     }
 }

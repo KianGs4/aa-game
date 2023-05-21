@@ -26,12 +26,12 @@
             <Font name="Berlin Sans FB" size="31.0" />
          </font>
       </Text>
-      <Text fill="#0b0b0b" layoutX="14.0" layoutY="718.0" strokeType="OUTSIDE" strokeWidth="0.0" text="remaining balls" textAlignment="CENTER" wrappingWidth="224.9121170043946">
+      <Text fill="#0b0b0b" layoutX="-76.0" layoutY="717.0" strokeType="OUTSIDE" strokeWidth="0.0" text="remaining balls" textAlignment="CENTER" wrappingWidth="412.1120681762696">
          <font>
             <Font name="Berlin Sans FB" size="31.0" />
          </font>
       </Text>
-      <Text fill="#0b0b0b" layoutX="239.0" layoutY="718.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="95.3121337890625">
+      <Text fill="#0b0b0b" layoutX="251.0" layoutY="718.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="95.3121337890625">
          <font>
             <Font name="Berlin Sans FB" size="31.0" />
          </font>

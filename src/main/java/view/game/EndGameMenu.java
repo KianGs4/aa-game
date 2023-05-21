@@ -23,10 +23,22 @@ public class EndGameMenu extends Application {
         stage.setScene(scene);
         stage.setTitle("aa game");
         stage.show();
+        stage.setOnCloseRequest(windowEvent -> {
+            try {
+                returnHome(stage);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
 
     }
 
     public void returnHome(MouseEvent mouseEvent) throws Exception {
+        new PrimaryMenu().start(Main.stage);
+        endGameStage.close();
+    }
+
+    public void returnHome(Stage stage) throws Exception {
         new PrimaryMenu().start(Main.stage);
         endGameStage.close();
     }

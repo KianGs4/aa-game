@@ -24,6 +24,7 @@ public class GameSetting {
         frozenKey = KeyCode.TAB;
     }
 
+
     public static String getDifficulty() {
         return difficulty;
     }

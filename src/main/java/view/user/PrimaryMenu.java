@@ -4,12 +4,14 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import model.GameSetting;
+import view.Main;
 
 import java.net.URL;
 
 public class PrimaryMenu extends Application {
-
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -17,10 +19,15 @@ public class PrimaryMenu extends Application {
 
         assert url != null;
         AnchorPane anchorPane = FXMLLoader.load(url);
+        if (GameSetting.getLanguage().equals("Persian")){
+            PrimaryMenuController primaryMenuController = new PrimaryMenuController(anchorPane);
+            primaryMenuController.translate();
+        }
         Scene scene = new Scene(anchorPane);
         stage.setScene(scene);
         stage.show();
     }
+
 
 
 
