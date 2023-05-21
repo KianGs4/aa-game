@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -47,6 +48,8 @@ public class PauseMenu extends Application {
         anchorPane.getChildren().add(toggleSwitch);
         if (GameSetting.getSound()) toggleSwitch.setSwitchedOn(true);
         stage.setTitle("aa game");
+        stage.getIcons().add(new Image(Main.class.getResourceAsStream("/Logos/logo.png")));
+
         stage.show();
         stage.setOnCloseRequest(windowEvent -> backToGame(stage));
     }

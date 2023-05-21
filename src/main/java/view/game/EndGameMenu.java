@@ -3,6 +3,7 @@ package view.game;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -21,6 +22,7 @@ public class EndGameMenu extends Application {
         ((Text) pane.getChildren().get(0)).setText("your score: " + Integer.valueOf(currentScore).toString());
         Scene scene = new Scene(pane);
         stage.setScene(scene);
+        stage.getIcons().add(new Image(Main.class.getResourceAsStream("/Logos/logo.png")));
         stage.setTitle("aa game");
         stage.show();
         stage.setOnCloseRequest(windowEvent -> {
