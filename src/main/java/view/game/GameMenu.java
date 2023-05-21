@@ -98,6 +98,7 @@ public class GameMenu extends Application {
         game.getShootingBalls().get(0).moveToShoot();
         createBall(game.getShootingBalls().get(1));
         Main.stage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
+
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode().equals(game.getShoot())) {
@@ -157,7 +158,13 @@ public class GameMenu extends Application {
         updateSituation();
         scoreInView.setText(Integer.valueOf(currentScore).toString());
         checkPhaseSituation();
-
+//        if ((game.getCurrentBalls() < 1 && hasContinue )) {
+//            try {
+//                endGameSituation();
+//            } catch (Exception e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
     }
 
     private void updateSituation() {
