@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane prefHeight="200.0" prefWidth="350.0" styleClass="blue-panel" stylesheets="@../../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.game.GameMenu">
+<AnchorPane prefHeight="200.0" prefWidth="350.0" styleClass="blue-panel" stylesheets="@../../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.game.EndGameMenu">
    <children>
       <Text fill="WHITE" layoutX="14.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="your score:  1000 " wrappingWidth="289.33668518066406">
          <font>

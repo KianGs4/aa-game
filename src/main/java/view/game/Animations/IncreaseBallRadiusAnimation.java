@@ -6,25 +6,29 @@ import model.CentralBall;
 import model.ShootingBall;
 
 public class IncreaseBallRadiusAnimation extends Transition {
-    private CentralBall centralBall;
+    private final CentralBall centralBall;
     private boolean bigMode;
     private boolean smallMode;
+    private boolean hasPaused;
 
-    public IncreaseBallRadiusAnimation(CentralBall centralBall) {
+    public IncreaseBallRadiusAnimation(CentralBall centralBall, boolean hasPaused) {
         this.centralBall = centralBall;
         this.setCycleCount(-1);
         this.setCycleDuration(Duration.millis(2000));
         bigMode = false;
         smallMode = true;
+        this.hasPaused = hasPaused;
     }
 
     @Override
     protected void interpolate(double v) {
-        if (v <= 0.5) {
-            if (smallMode) increaseRadius();
-        }
-        if (v > 0.5){
-            if (bigMode) reduceRadius();
+        if (!hasPaused) {
+            if (v <= 0.5) {
+                if (smallMode) increaseRadius();
+            }
+            if (v > 0.5) {
+                if (bigMode) reduceRadius();
+            }
         }
     }
 

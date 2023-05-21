@@ -6,22 +6,26 @@ import model.CentralBall;
 import model.ShootingBall;
 
 public class VisibilityModeAnimation extends Transition {
-    private CentralBall centralBall;
+    private final CentralBall centralBall;
     private boolean visibility;
+    private boolean hasPaused;
 
-    public VisibilityModeAnimation(CentralBall centralBall) {
+    public VisibilityModeAnimation(CentralBall centralBall, boolean hasPaused) {
         this.centralBall = centralBall;
         this.setCycleCount(-1);
         this.setCycleDuration(Duration.millis(2000));
         visibility = true;
+        this.hasPaused = hasPaused;
     }
 
     @Override
     protected void interpolate(double v) {
-        if (v <= 0.5 && visibility)
-            invisible();
-        if (v > 0.5 && !visibility)
-            visible();
+        if(!hasPaused) {
+            if (v <= 0.5 && visibility)
+                invisible();
+            if (v > 0.5 && !visibility)
+                visible();
+        }
 
     }
 

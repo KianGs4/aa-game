@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class GameMenu extends Application  {
+public class GameMenu extends Application {
 
     public Text scoreInView;
     private Game game;
@@ -37,6 +37,7 @@ public class GameMenu extends Application  {
     public Pane pane;
     public boolean hasContinue = true;
     public boolean isClockWise = true;
+    public boolean hasPaused = false;
 
     public static User currentPlayer;
     private int currentScore = 0;
@@ -44,7 +45,7 @@ public class GameMenu extends Application  {
 
     private final ArrayList<Timeline> rotations = new ArrayList<>();
     private final Time time = new Time("0:0");
-    private Timeline passingTime = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+    private final Timeline passingTime = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
         if (time.getSecondsLeft() > 120) {
             try {
                 hasContinue = false;
@@ -53,8 +54,10 @@ public class GameMenu extends Application  {
                 throw new RuntimeException(ex);
             }
         }
-        time.oneSecondPassed();
-        ((Text)pane.getChildren().get(6)).setText(time.getCurrentTime());
+        if (!hasPaused) {
+            time.oneSecondPassed();
+            ((Text) pane.getChildren().get(6)).setText(time.getCurrentTime());
+        }
     }));
 
     @Override
@@ -76,7 +79,7 @@ public class GameMenu extends Application  {
     }
 
     private void setGameTime() {
-        ((Text)pane.getChildren().get(6)).setText(time.getCurrentTime());
+        ((Text) pane.getChildren().get(6)).setText(time.getCurrentTime());
         passingTime.setCycleCount(Animation.INDEFINITE);
         passingTime.play();
 
@@ -113,7 +116,6 @@ public class GameMenu extends Application  {
             }
         });
     }
-
 
 
     private void moveLeft() {
@@ -210,12 +212,12 @@ public class GameMenu extends Application  {
         if (phase.equals(Phase.PHASE_2)) {
             stopRotations();
             rotations.clear();
-            new IncreaseBallRadiusAnimation(game.getSecondCentralBall()).play();
+            new IncreaseBallRadiusAnimation(game.getSecondCentralBall(), hasPaused).play();
             for (ShootingBall shootingBall : game.getSecondCentralBall().getBalls())
                 rotateInPhase2(shootingBall);
         }
         if (phase.equals(Phase.PHASE_3)) {
-            new VisibilityModeAnimation(game.getSecondCentralBall()).play();
+            new VisibilityModeAnimation(game.getSecondCentralBall(), hasPaused).play();
             if (!GameSetting.isBW_mode()) pane.getStyleClass().add("yellow-pane");
         }
 
@@ -323,7 +325,7 @@ public class GameMenu extends Application  {
         }
         if (currentScore >= currentPlayer.getHighScore()) {
             currentPlayer.setHighScore(currentScore);
-            currentPlayer.setInfo(GameSetting.getDifficulty(),time.getSecondsLeft());
+            currentPlayer.setInfo(GameSetting.getDifficulty(), time.getSecondsLeft());
             DataBase.getInstance().updateData();
             DataBase.getInstance().updateRankings();
         }
@@ -332,28 +334,31 @@ public class GameMenu extends Application  {
     }
 
     //TODO close handling
-    private void runEndGameMenu(Stage stage) throws IOException {
-        Pane pane = FXMLLoader.load(Main.class.getResource("/FXML/game/endGameShow.fxml"));
-
-        ((Text) pane.getChildren().get(0)).setText("your score:" + Integer.valueOf(currentScore).toString());
-        Scene scene = new Scene(pane);
-        stage.setScene(scene);
-        stage.setTitle("aa game");
-        stage.show();
+    private void runEndGameMenu(Stage stage) throws Exception {
+        EndGameMenu.setEndGameStage(stage);
+        EndGameMenu.setCurrentScore(currentScore);
+        new EndGameMenu().start(stage);
     }
 
 
-    public void returnHome(MouseEvent mouseEvent) throws Exception {
-        endGameStage.close();
-        new PrimaryMenu().start(Main.stage);
-    }
+
 
     private void pauseSituation() throws Exception {
-        for (Timeline timeline: rotations) {
+        hasPaused = true;
+        for (Timeline timeline : rotations) {
             timeline.pause();
         }
         Stage stage = new Stage();
+        PauseMenu.setPauseStage(stage);
+        PauseMenu.setGameMenu(this);
         new PauseMenu().start(stage);
+    }
+
+    public void resumeGame() {
+        hasPaused = false;
+        for (Timeline timeline : rotations) {
+            timeline.play();
+        }
     }
 
     public ArrayList<Timeline> getRotations() {
