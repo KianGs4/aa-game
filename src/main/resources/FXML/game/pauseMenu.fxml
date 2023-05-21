@@ -14,7 +14,7 @@
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </Text>
-      <Button layoutX="65.0" layoutY="21.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="56.0" styleClass="button-1">
+      <Button layoutX="65.0" layoutY="21.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="56.0" styleClass="button-1" onMouseClicked="#chooseMusic">
          <graphic>
             <FontAwesomeIcon fill="WHITE" glyphName="MUSIC" size="35" />
          </graphic>

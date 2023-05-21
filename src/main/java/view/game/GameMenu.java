@@ -107,7 +107,7 @@ public class GameMenu extends Application {
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode().equals(game.getShoot())) {
                     if (game.getCurrentBalls() >= 1 && hasContinue){
-                        new Sound(2).play();
+                        new Sound(3).play();
                         shootAction();
                     }
                     else {
@@ -344,7 +344,7 @@ public class GameMenu extends Application {
                 LooseGameAnimation looseGameAnimation = new LooseGameAnimation(pane);
                 looseGameAnimation.play();
                 PrimaryMenu.mainSound.stop();
-                new Sound(1).play();
+                new Sound(4).play();
             } else pane.getStyleClass().add("green-pane");
         }
         if (currentScore >= currentPlayer.getHighScore()) {

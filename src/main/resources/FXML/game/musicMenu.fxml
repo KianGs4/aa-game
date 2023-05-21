@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox prefHeight="238.0" prefWidth="218.0" styleClass="pause-pane" stylesheets="@../../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.game.PauseMenu">
+   <children>
+      <Button mnemonicParsing="false" prefHeight="79.3" prefWidth="218.0" styleClass="button-1" text="Track 1" onMouseClicked="#changeTrackTo1">
+         <font>
+            <Font name="Berlin Sans FB Bold" size="33.0" />
+         </font>
+      </Button>
+      <Button mnemonicParsing="false" prefHeight="79.3" prefWidth="218.0" styleClass="button-1" text="Track 2" onMouseClicked="#changeTrackTo2">
+         <font>
+            <Font name="Berlin Sans FB Bold" size="33.0" />
+         </font>
+      </Button>
+      <Button mnemonicParsing="false" prefHeight="79.3" prefWidth="218.0" styleClass="button-1" text="Track 3" onMouseClicked="#changeTrackTo3">
+         <font>
+            <Font name="Berlin Sans FB Bold" size="33.0" />
+         </font>
+      </Button>
+   </children>
+</VBox>

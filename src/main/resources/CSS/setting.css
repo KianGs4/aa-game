@@ -52,15 +52,6 @@
     -fx-font-size: 20px ;
 }
 
-.slider .thumb {
-    -fx-background-color: linear-gradient(to top, white, #2196f3);
-
-}
-
-.slider .track {
-    -fx-background-color: linear-gradient(to right, white, #2196f3);
-}
-
 .choice-box {
     -fx-background-color: #ACACAC;
     -fx-background-radius: 50px;
