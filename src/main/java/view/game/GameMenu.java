@@ -7,11 +7,9 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -24,7 +22,6 @@ import view.game.Animations.*;
 import view.user.PrimaryMenu;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class GameMenu extends Application {
@@ -74,7 +71,7 @@ public class GameMenu extends Application {
         setGameTime();
         pane.getChildren().get(8).setVisible(false);
         updateRemainingBall();
-        if (GameSetting.getLanguage().equals("Persian"))translate(pane);
+        if (GameSetting.getLanguage().equals("Persian")) translate(pane);
         if (GameSetting.getSound()) {
             PrimaryMenu.mainSound.play();
             PrimaryMenu.mainSound.loop();
@@ -83,7 +80,7 @@ public class GameMenu extends Application {
         shootHandling();
     }
 
-    private void translate(Pane pane){
+    private void translate(Pane pane) {
         ((Text) pane.getChildren().get(0)).setText("امتیاز");
         ((Text) pane.getChildren().get(2)).setText("باد");
         ((Text) pane.getChildren().get(4)).setText("تعداد توپ باقی مانده");
@@ -106,11 +103,10 @@ public class GameMenu extends Application {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode().equals(game.getShoot())) {
-                    if (game.getCurrentBalls() >= 1 && hasContinue){
+                    if (game.getCurrentBalls() >= 1 && hasContinue) {
                         new Sound(3).play();
                         shootAction();
-                    }
-                    else {
+                    } else {
                         try {
                             endGameSituation();
                         } catch (Exception e) {
@@ -162,16 +158,9 @@ public class GameMenu extends Application {
         if (!hasContinue) stopRotations();
         if (game.getCurrentBalls() >= 2) createBall(game.getShootingBalls().get(1));
         if (game.getCurrentBalls() >= 1) game.getShootingBalls().get(0).moveToShoot();
-        updateSituation();
         scoreInView.setText(Integer.valueOf(currentScore).toString());
         checkPhaseSituation();
-//        if ((game.getCurrentBalls() < 1 && hasContinue )) {
-//            try {
-//                endGameSituation();
-//            } catch (Exception e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
+
     }
 
     private void updateSituation() {
@@ -212,15 +201,21 @@ public class GameMenu extends Application {
                 }
                 break;
             case PHASE_2:
+                new PassingTimeAnimation(this, game.getSecondCentralBall(), 6).play();
                 if (2 * game.getCurrentBalls() < game.getNumberOfBalls()) {
                     game.setPhase(Phase.PHASE_3);
                     changePhase(game.getPhase());
                 }
                 break;
             case PHASE_3:
+                new PassingTimeAnimation(this, game.getSecondCentralBall(), 6).play();
                 if (4 * game.getCurrentBalls() < game.getNumberOfBalls()) {
                     game.setPhase(Phase.PHASE_4);
                 }
+                break;
+            case PHASE_4:
+                new PassingTimeAnimation(this, game.getSecondCentralBall(), 6).play();
+                break;
         }
     }
 
@@ -272,7 +267,6 @@ public class GameMenu extends Application {
                 new KeyFrame(Duration.ZERO, actionEvent -> {
                     for (ShootingBall shootingBallSelected : game.getSecondCentralBall().getBalls()) {
                         if (shootingBallSelected.equals(shootingBall)) continue;
-                        ;
                         if (shootingBallSelected.getBall().getBoundsInParent().intersects(shootingBall.getBall().getBoundsInParent())) {
                             hasContinue = false;
                             try {
@@ -294,16 +288,18 @@ public class GameMenu extends Application {
         circleRotationPhase2.setPivotX(game.getSecondCentralBall().getCenterX());
         circleRotationPhase2.setPivotY(game.getSecondCentralBall().getCenterY());
         addRotation(shootingBall, circleRotationPhase2);
-        Timeline circleRotationPhase2TimeLine = createPhase2TimeLine(shootingBall, circleRotationPhase2);
+        Timeline circleRotationPhase2TimeLine = (isClockWise) ?
+                createClockWisePhase2TimeLine(shootingBall, circleRotationPhase2) :
+                createCounterClockWisePhase2TimeLine(shootingBall, circleRotationPhase2);
         runTimeLine(circleRotationPhase2TimeLine);
     }
 
-    private Timeline createPhase2TimeLine(ShootingBall shootingBall, Rotate circleRotationPhase2) {
-        return new Timeline(
-                new KeyFrame(Duration.ZERO, new KeyValue(circleRotationPhase2.angleProperty(), 0)),
-                new KeyFrame(Duration.seconds(6), new KeyValue(circleRotationPhase2.angleProperty(), 380 * (6 / game.getRotateSpeed()))),
-                new KeyFrame(Duration.seconds(12), new KeyValue(circleRotationPhase2.angleProperty(), 0)),
+    private Timeline createClockWisePhase2TimeLine(ShootingBall shootingBall, Rotate circleRotationPhase2) {
+        double angle = calculateAngle(shootingBall.getBall(), game.getSecondCentralBall());
 
+        return new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(circleRotationPhase2.angleProperty(), angle)),
+                new KeyFrame(Duration.seconds(6), new KeyValue(circleRotationPhase2.angleProperty(), 380 * (6 / game.getRotateSpeed()) + angle)),
                 new KeyFrame(Duration.ZERO, actionEvent -> {
                     for (ShootingBall shootingBallSelected : game.getSecondCentralBall().getBalls()) {
                         if (shootingBallSelected.equals(shootingBall)) continue;
@@ -320,6 +316,35 @@ public class GameMenu extends Application {
                 })
         );
     }
+
+    private double calculateAngle(Circle ball, Circle ball2) {
+        double distance_x = ball.getCenterX() - ball2.getCenterX();
+        double distance_y = ball.getCenterY() - ball2.getCenterY();
+        return Math.asin(distance_x / (Math.sqrt(distance_x * distance_x + distance_y * distance_y)));
+    }
+
+    private Timeline createCounterClockWisePhase2TimeLine(ShootingBall shootingBall, Rotate circleRotationPhase2) {
+        double angle = calculateAngle(shootingBall.getBall(), game.getSecondCentralBall());
+        return new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(circleRotationPhase2.angleProperty(), angle)),
+                new KeyFrame(Duration.seconds(6), new KeyValue(circleRotationPhase2.angleProperty(), -1 * (380 * (6 / game.getRotateSpeed())) + angle)),
+                new KeyFrame(Duration.ZERO, actionEvent -> {
+                    for (ShootingBall shootingBallSelected : game.getSecondCentralBall().getBalls()) {
+                        if (shootingBallSelected.equals(shootingBall)) continue;
+                        if (shootingBallSelected.getBall().getBoundsInParent().intersects(shootingBall.getBall().getBoundsInParent())) {
+                            hasContinue = false;
+                            try {
+                                endGameSituation();
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+                            return;
+                        }
+                    }
+                })
+        );
+    }
+
 
     private void runTimeLine(Timeline timeline) {
         timeline.setAutoReverse(false);
@@ -363,8 +388,6 @@ public class GameMenu extends Application {
         EndGameMenu.setCurrentScore(currentScore);
         new EndGameMenu().start(stage);
     }
-
-
 
 
     private void pauseSituation() throws Exception {
