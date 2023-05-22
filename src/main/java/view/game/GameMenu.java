@@ -160,7 +160,7 @@ public class GameMenu extends Application {
         if (game.getCurrentBalls() >= 1) game.getShootingBalls().get(0).moveToShoot();
         scoreInView.setText(Integer.valueOf(currentScore).toString());
         checkPhaseSituation();
-
+        updateSituation();
     }
 
     private void updateSituation() {
