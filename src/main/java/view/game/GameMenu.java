@@ -435,7 +435,6 @@ public class GameMenu extends Application {
 
     }
 
-    //TODO close handling
     private void runEndGameMenu(Stage stage) throws Exception {
         EndGameMenu.setEndGameStage(stage);
         EndGameMenu.setCurrentScore(currentScore);
@@ -461,9 +460,6 @@ public class GameMenu extends Application {
         }
     }
 
-    public ArrayList<Timeline> getRotations() {
-        return rotations;
-    }
 
     public Game getGame() {
         return game;

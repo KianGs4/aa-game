@@ -1,6 +1,5 @@
 package view.user;
 
-import controller.ParentController;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -62,7 +61,6 @@ public class LoginMenuController {
     }
 
     private void goToProfile(User user) throws Exception {
-        ParentController profileController = new ParentController(user);
         PrimaryMenuController.setProfileController(user);
         new PrimaryMenu().start(Main.stage);
     }

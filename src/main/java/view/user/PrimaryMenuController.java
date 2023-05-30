@@ -52,8 +52,8 @@ public class PrimaryMenuController {
         new SettingMenu().start(Main.stage);
     }
 
-    public void goToGame(MouseEvent mouseEvent) throws IOException {
+    public void goToGame(MouseEvent mouseEvent) throws Exception {
         GameMenu.currentPlayer = currentUser;
-        new TwoPlayerGameMenu().start(Main.stage);
+        new SelectModePlayerMenu().start(Main.stage);
     }
 }
