@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -39,7 +41,7 @@ public class GameMenu extends Application {
     public boolean hasPaused = false;
 
     public static User currentPlayer;
-    private int currentScore = 0;
+    protected int currentScore = 0;
     public int wind = 0;
 
     private final ArrayList<Timeline> rotations = new ArrayList<>();
@@ -86,14 +88,14 @@ public class GameMenu extends Application {
         shootHandling();
     }
 
-    private void translate(Pane pane) {
+    protected void translate(Pane pane) {
         ((Text) pane.getChildren().get(0)).setText("امتیاز");
         ((Text) pane.getChildren().get(2)).setText("باد");
         ((Text) pane.getChildren().get(4)).setText("تعداد توپ باقی مانده");
 
     }
 
-    private void setGameTime() {
+    protected void setGameTime() {
         ((Text) pane.getChildren().get(6)).setText(time.getCurrentTime());
         passingTime.setCycleCount(Animation.INDEFINITE);
         passingTime.play();
@@ -122,9 +124,9 @@ public class GameMenu extends Application {
                 }
 
                 if (game.getPhase().equals(Phase.PHASE_4) && keyEvent.getCode().equals(KeyCode.LEFT))
-                    moveLeft();
+                    moveLeft(game.getShootingBalls().get(0));
                 if (game.getPhase().equals(Phase.PHASE_4) && keyEvent.getCode().equals(KeyCode.RIGHT))
-                    moveRight();
+                    moveRight(game.getShootingBalls().get(0));
                 if (keyEvent.getCode().equals(KeyCode.P)) {
                     try {
                         pauseSituation();
@@ -132,7 +134,7 @@ public class GameMenu extends Application {
                         throw new RuntimeException(e);
                     }
                 }
-                if (keyEvent.getCode().equals(GameSetting.getFrozenKey())) {
+                if (keyEvent.getCode().equals(game.getFreeze())) {
                     try {
                         freezeMode();
                     } catch (InterruptedException e) {
@@ -143,31 +145,33 @@ public class GameMenu extends Application {
         });
     }
 
-    private void freezeMode() throws InterruptedException {
-        freezeMode = true;
+    void freezeMode() throws InterruptedException {
         ProgressBar freezeBar = ((ProgressBar) pane.getChildren().get(7));
-        if (freezeBar.getProgress() >= 1) {
-            freezeBar.setProgress(0);
-            stopRotations();
-            rotations.clear();
-            game.setRotateSpeed(4.5);
-            for (ShootingBall shootingBall : game.getSecondCentralBall().getBalls()) {
-                if (game.getPhase().equals(Phase.PHASE_1)) {
-//                    if (rotations.size() == 0) {
-//                        System.out.println("0");
-//                        rotateInPhase1(shootingBall, game.getFreezeTime() - 1);
-//                    } else
-                        rotateInPhase1(shootingBall, game.getFreezeTime());
-                } else rotateInPhase2(shootingBall, game.getFreezeTime());
-                rotations.get(rotations.size() - 1).setCycleCount(1);
-            }
-            new PassingTimeAnimation(this,game.getFreezeTime() - 1).play();
+        if (freezeBar.getProgress() < 1) return;
+        freezeMode = true;
+        Image image = new Image(GameMenu.class.getResource("/Images/giphy.gif").toString());
+        ImageView img = new ImageView(image);
+        img.setTranslateX(150);
+        pane.getChildren().add(img);
+        freezeMode = true;
+        freezeBar.setProgress(0);
+        stopRotations();
+        rotations.clear();
+        game.setRotateSpeed(4.5);
+        for (ShootingBall shootingBall : game.getSecondCentralBall().getBalls()) {
+            if (game.getPhase().equals(Phase.PHASE_1)) {
 
-
+                rotateInPhase1(shootingBall, game.getFreezeTime() + 1);
+            } else rotateInPhase2(shootingBall, game.getFreezeTime() + 1);
+            rotations.get(rotations.size() - 1).setCycleCount(1);
         }
+        new PassingTimeAnimation(this, game.getFreezeTime(), img).play();
+
+
     }
 
-    public void backToNormal() {
+    public void backToNormal(ImageView image) {
+        pane.getChildren().remove(image);
         stopRotations();
         rotations.clear();
         game.getConstants();
@@ -178,23 +182,23 @@ public class GameMenu extends Application {
     }
 
 
-    private void moveLeft() {
-        Circle ball = game.getShootingBalls().get(0).getBall();
+    protected void moveLeft(ShootingBall shootingBall) {
+        Circle ball = shootingBall.getBall();
         if (!(ball.getCenterX() - ball.getRadius() - 15 < 0)) {
             ball.setCenterX(ball.getCenterX() - 10);
-            game.getShootingBalls().get(0).getText().setX(game.getShootingBalls().get(0).getText().getX() - 10);
+            shootingBall.getText().setX(shootingBall.getText().getX() - 10);
         }
     }
 
-    private void moveRight() {
-        Circle ball = game.getShootingBalls().get(0).getBall();
+    protected void moveRight(ShootingBall shootingBall) {
+        Circle ball = shootingBall.getBall();
         if (!(ball.getCenterX() + ball.getRadius() + 15 > pane.getWidth())) {
             ball.setCenterX(ball.getCenterX() + 10);
-            game.getShootingBalls().get(0).getText().setX(game.getShootingBalls().get(0).getText().getX() + 10);
+            shootingBall.getText().setX(shootingBall.getText().getX() + 10);
         }
     }
 
-    private void createBall(ShootingBall shootingBall) {
+    protected void createBall(ShootingBall shootingBall) {
         pane.getChildren().add(shootingBall.getBall());
         pane.getChildren().add(shootingBall.getText());
     }
@@ -228,17 +232,19 @@ public class GameMenu extends Application {
                 addedProgress = 0.24;
                 break;
         }
+        if (GameSetting.getDifficulty().equals("Medium")) addedProgress += 0.3;
+        if (GameSetting.getDifficulty().equals("Hard")) addedProgress += 0.7;
         ProgressBar freezeBar = (ProgressBar) pane.getChildren().get(7);
         freezeBar.setProgress(freezeBar.getProgress() + addedProgress);
     }
 
-    private void updateSituation() {
+    protected void updateSituation() {
         addScore();
         updateRemainingBall();
         updateFreezeBar();
     }
 
-    private void updateRemainingBall() {
+    protected void updateRemainingBall() {
         ((Text) pane.getChildren().get(5)).setText(Integer.valueOf(game.getCurrentBalls()).toString());
     }
 
@@ -261,7 +267,7 @@ public class GameMenu extends Application {
         }
     }
 
-    private void checkPhaseSituation() {
+    protected void checkPhaseSituation() {
         if (game.getCurrentBalls() == 3 && !GameSetting.isBW_mode()) changeColorToBlue();
         switch (game.getPhase()) {
             case PHASE_1:
@@ -287,7 +293,8 @@ public class GameMenu extends Application {
     }
 
     private void changeColorToBlue() {
-        pane.getStyleClass().remove(1);
+        if (pane.getChildren().size() >= 2)
+            pane.getStyleClass().remove(1);
         pane.getStyleClass().add("blue-pane");
     }
 
@@ -321,7 +328,7 @@ public class GameMenu extends Application {
         }
     }
 
-    private void rotateInPhase1(ShootingBall shootingBall, double time) {
+    protected void rotateInPhase1(ShootingBall shootingBall, double time) {
         Rotate circleRotationPhase1 = new Rotate();
         circleRotationPhase1.setPivotX(game.getSecondCentralBall().getCenterX());
         circleRotationPhase1.setPivotY(game.getSecondCentralBall().getCenterY());
@@ -394,7 +401,7 @@ public class GameMenu extends Application {
 
     private void runTimeLine(Timeline timeline, boolean b) {
         timeline.setAutoReverse(b);
-        if (!freezeMode)timeline.setCycleCount(-1);
+        if (!freezeMode) timeline.setCycleCount(-1);
         rotations.add(timeline);
         timeline.play();
     }
@@ -436,7 +443,7 @@ public class GameMenu extends Application {
     }
 
 
-    private void pauseSituation() throws Exception {
+    void pauseSituation() throws Exception {
         hasPaused = true;
         for (Timeline timeline : rotations) {
             timeline.pause();
@@ -460,6 +467,10 @@ public class GameMenu extends Application {
 
     public Game getGame() {
         return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 
 }

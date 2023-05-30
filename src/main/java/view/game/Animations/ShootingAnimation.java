@@ -13,7 +13,8 @@ import view.game.GameMenu;
 public class ShootingAnimation extends Transition {
     private final CentralBall centralBall;
     private final ShootingBall shootingBall;
-    private final GameMenu  gameMenu;
+    private final GameMenu gameMenu;
+    private int secondPlayerMode = 1;
 
     public ShootingAnimation(CentralBall centralBall, ShootingBall shootingBall, GameMenu gameMenu) {
         this.centralBall = centralBall;
@@ -23,16 +24,26 @@ public class ShootingAnimation extends Transition {
         this.setCycleCount(-1);
     }
 
+    public ShootingAnimation(CentralBall centralBall, ShootingBall shootingBall, GameMenu gameMenu, int playerMode) {
+        this.centralBall = centralBall;
+        this.shootingBall = shootingBall;
+        this.gameMenu = gameMenu;
+        this.setCycleDuration(Duration.millis(5000));
+        this.setCycleCount(-1);
+        secondPlayerMode = playerMode;
+    }
+
     @Override
     protected void interpolate(double v) {
-        double y = shootingBall.getBall().getCenterY() - 10 ;
-        double x = shootingBall.getBall().getCenterX() + (double) gameMenu.wind /4;
+        double y = shootingBall.getBall().getCenterY() - (secondPlayerMode * 10);
+        double x = shootingBall.getBall().getCenterX() + (((double) gameMenu.wind / 4) * secondPlayerMode);
         if (shootingBall.getBall().getBoundsInParent().intersects(centralBall.getBoundsInParent())) {
             stick();
             this.stop();
         }
 
-        if (shootingBall.getBall().getCenterY() - 10 - shootingBall.getBall().getRadius() < 0){
+        if (shootingBall.getBall().getCenterY() - 10 - shootingBall.getBall().getRadius()/2 < 0 ||
+            shootingBall.getBall().getCenterY() + 10 + shootingBall.getBall().getRadius()/2 > gameMenu.pane.getHeight()) {
             outOfWindow();
             stop();
         }
@@ -48,11 +59,11 @@ public class ShootingAnimation extends Transition {
         gameMenu.setRotation(shootingBall);
         if (gameMenu.getGame().getPhase().equals(Phase.PHASE_4)) {
             gameMenu.wind = Utils.generateRandomWind(gameMenu.getGame().getWindSpeed());
-            ((Text)gameMenu.pane.getChildren().get(3)).setText(Integer.valueOf(gameMenu.wind).toString());
+            ((Text) gameMenu.pane.getChildren().get(3)).setText(Integer.valueOf(gameMenu.wind).toString());
         }
     }
 
-    private void outOfWindow(){
+    private void outOfWindow() {
         try {
             gameMenu.hasContinue = false;
             gameMenu.endGameSituation();

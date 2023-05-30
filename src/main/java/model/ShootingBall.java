@@ -20,11 +20,18 @@ public class ShootingBall extends StackPane {
         this.getChildren().add(ball);
         this.getChildren().add(this.text);
     }
+    public ShootingBall(String text, double y) {
+        ball = new Circle((double) 850 / 2, y, 14);
+        initialiseText(text);
+        this.getChildren().add(ball);
+        this.getChildren().add(this.text);
+    }
+
 
     private void initialiseText(String text) {
         this.text = new Text(text);
-        this.text.setY(ball.getCenterY() + ball.getRadius()/3 );
         if (text.equals("")) return;
+        this.text.setY(ball.getCenterY() + ball.getRadius()/3 );
 
         if (Integer.parseInt(text) < 10 ) {
             this.text.setX(ball.getCenterX() - ball.getRadius()/3);

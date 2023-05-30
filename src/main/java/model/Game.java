@@ -12,7 +12,7 @@ public class Game {
     private final int numberOfBalls;
     private int currentBalls;
     private Phase phase;
-    private final CentralBall firstCentralBall;
+    private  CentralBall firstCentralBall;
     private final CentralBall secondCentralBall;
     private double rotateSpeed;
     private double windSpeed;
@@ -28,7 +28,7 @@ public class Game {
         currentBalls = numberOfBalls;
         phase = Phase.PHASE_1;
         secondCentralBall = new CentralBall((double) 850 / 2, (double) 420 / 2, 240);
-        firstCentralBall = makeFirstCentralBall(secondCentralBall);
+        makeFirstCentralBall(secondCentralBall);
         createBalls(numberOfBalls);
         getConstants();
     }
@@ -42,7 +42,7 @@ public class Game {
             shootingBall.makeLine(secondCentralBall, pane);
             secondCentralBall.getBalls().add(shootingBall);
             if (GameSetting.getMap().equals(GameMap.MAP1)) {
-                if (i < 115) i *=2;
+                if (i < 115) i *= 2;
                 else i += 50;
             }
         }
@@ -102,8 +102,8 @@ public class Game {
         return freeze;
     }
 
-    private CentralBall makeFirstCentralBall(CentralBall centralBall) {
-        return new CentralBall(centralBall.getCenterX(), centralBall.getCenterY(), centralBall.getRadius() / 3);
+    public void makeFirstCentralBall(CentralBall centralBall) {
+        firstCentralBall = new CentralBall(centralBall.getCenterX(), centralBall.getCenterY(), 70);
     }
 
     public void shoot() {

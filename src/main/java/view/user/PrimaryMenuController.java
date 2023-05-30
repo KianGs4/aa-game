@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
 import model.User;
 import view.Main;
 import view.game.GameMenu;
+import view.game.TwoPlayerGameMenu;
 
 import java.io.IOException;
 
@@ -53,6 +54,6 @@ public class PrimaryMenuController {
 
     public void goToGame(MouseEvent mouseEvent) throws IOException {
         GameMenu.currentPlayer = currentUser;
-        new GameMenu().start(Main.stage);
+        new TwoPlayerGameMenu().start(Main.stage);
     }
 }
