@@ -3,7 +3,7 @@ package model;
 public enum GameMap {
     MAP1(25),
     MAP2(70),
-    MAP3(50);
+    MAP3(45);
     GameMap(int angle) {
         this.angle = angle;
     }

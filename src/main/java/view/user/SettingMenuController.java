@@ -14,6 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import model.GameMap;
 import model.GameSetting;
 import view.Main;
 
@@ -27,6 +28,10 @@ public class SettingMenuController implements Initializable {
     public Button shootButton;
     public Button freezeButton;
     public ToggleButton soundButton;
+    public Button map3;
+    public Button map2;
+    public Button map1;
+
 
     //TODO Handle close and save option
     //TODO make more CSS
@@ -100,12 +105,13 @@ public class SettingMenuController implements Initializable {
             fxml = FXMLLoader.load(getClass().getResource("/FXML/setting/general.fxml"));
             pane.getChildren().removeAll();
             pane.getChildren().setAll(fxml);
-            pane.getChildren().setAll(fxml);
             setDefaultOfGeneralSetting();
 
         } catch (IOException ignored) {
         }
     }
+
+
 
     private void setDefaultOfGeneralSetting() {
         Pane samplePane = (Pane) pane.getChildren().get(0);
@@ -116,6 +122,39 @@ public class SettingMenuController implements Initializable {
 
 
     }
+
+    public void openMapSetting(MouseEvent mouseEvent) {
+        try {
+            fxml = FXMLLoader.load(getClass().getResource("/FXML/setting/map.fxml"));
+            pane.getChildren().removeAll();
+            pane.getChildren().setAll(fxml);
+            setDefaultOfMapSetting();
+        } catch (IOException ignored) {
+        }
+
+    }
+
+    private void setDefaultOfMapSetting() {
+        Pane samplePane = (Pane) pane.getChildren().get(0);
+
+        switch (GameSetting.getMap()) {
+            case MAP1:
+                selectingMap(0, samplePane);
+                break;
+            case MAP2:
+                selectingMap(1, samplePane);
+                break;
+            case MAP3:
+                selectingMap(2, samplePane);
+                break;
+        }
+
+    }
+
+    private void selectingMap(int i, Pane pane) {
+        pane.getChildren().get(i).getStyleClass().add("selected-button");
+    }
+
 
     public void changeNumberOfBalls(MouseEvent mouseEvent) {
         ballsValue.setText(Integer.valueOf((int) slider.getValue()).toString());
@@ -170,5 +209,26 @@ public class SettingMenuController implements Initializable {
     public void changeSound(MouseEvent mouseEvent) {
         GameSetting.setSound(!GameSetting.getSound());
         soundButton.setText((GameSetting.getSound()) ? "On" : "Off");
+    }
+
+    public void changeMap(MouseEvent mouseEvent) {
+        removeSelectingStyle();
+        if (mouseEvent.getPickResult().getIntersectedNode().toString().matches(".+Map 1.+")) {
+            map1.getStyleClass().add("selected-button");
+            GameSetting.setMap(GameMap.MAP1);
+        } else if (mouseEvent.getPickResult().getIntersectedNode().toString().matches(".+Map 2.+")) {
+            map2.getStyleClass().add("selected-button");
+            GameSetting.setMap(GameMap.MAP2);
+        } else {
+            map3.getStyleClass().add("selected-button");
+            GameSetting.setMap(GameMap.MAP3);
+        }
+
+    }
+
+    private void removeSelectingStyle() {
+        map1.getStyleClass().remove("selected-button");
+        map2.getStyleClass().remove("selected-button");
+        map3.getStyleClass().remove("selected-button");
     }
 }

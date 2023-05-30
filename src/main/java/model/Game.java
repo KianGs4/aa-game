@@ -14,9 +14,9 @@ public class Game {
     private Phase phase;
     private final CentralBall firstCentralBall;
     private final CentralBall secondCentralBall;
-    private  double rotateSpeed;
-    private  double windSpeed;
-    private  int freezeTime;
+    private double rotateSpeed;
+    private double windSpeed;
+    private int freezeTime;
 
     private final ArrayList<ShootingBall> shootingBalls = new ArrayList<>();
 
@@ -27,46 +27,49 @@ public class Game {
         this.numberOfBalls = numberOfBalls;
         currentBalls = numberOfBalls;
         phase = Phase.PHASE_1;
-        secondCentralBall = new CentralBall((double) 850 /2, (double) 420 /2, 240);
+        secondCentralBall = new CentralBall((double) 850 / 2, (double) 420 / 2, 240);
         firstCentralBall = makeFirstCentralBall(secondCentralBall);
         createBalls(numberOfBalls);
-        getConstnats();
+        getConstants();
     }
 
     public void createSampleBalls(CentralBall secondCentralBall, Pane pane) {
-        for (int i = 0; i <= 360 ; i+=GameSetting.getMap().getAngle()) {
+        for (int i = 0; i < 315; i += GameSetting.getMap().getAngle()) {
             ShootingBall shootingBall = new ShootingBall("");
-            shootingBall.getBall().setCenterX(Math.cos(i*GameSetting.getMap().getAngle())*secondCentralBall.getRadius() + secondCentralBall.getCenterX() );
-            shootingBall.getBall().setCenterY(Math.sin(i*GameSetting.getMap().getAngle())*secondCentralBall.getRadius() + secondCentralBall.getCenterY());
+            shootingBall.getBall().setCenterX(Math.cos(i * GameSetting.getMap().getAngle()) * secondCentralBall.getRadius() + secondCentralBall.getCenterX());
+            shootingBall.getBall().setCenterY(Math.sin(i * GameSetting.getMap().getAngle()) * secondCentralBall.getRadius() + secondCentralBall.getCenterY());
             pane.getChildren().add(shootingBall.getBall());
-            shootingBall.makeLine(secondCentralBall,pane);
+            shootingBall.makeLine(secondCentralBall, pane);
             secondCentralBall.getBalls().add(shootingBall);
-            if (GameSetting.getMap().equals(GameMap.MAP1)) i*=2;
+            if (GameSetting.getMap().equals(GameMap.MAP1)) {
+                if (i < 115) i *=2;
+                else i += 50;
+            }
         }
     }
 
-    private void getConstnats() {
+    private void getConstants() {
         switch (GameSetting.getDifficulty()) {
             case "Easy":
                 rotateSpeed = 2.5;
-                windSpeed= 1.2;
+                windSpeed = 1.2;
                 freezeTime = 7;
                 break;
             case "Medium":
                 rotateSpeed = 1.25;
-                windSpeed= 1.5;
+                windSpeed = 1.5;
                 freezeTime = 5;
                 break;
             case "Hard":
                 rotateSpeed = 0.83;
-                windSpeed= 1.8;
+                windSpeed = 1.8;
                 freezeTime = 3;
                 break;
         }
     }
 
     private void createBalls(int currentBalls) {
-        for (int i = currentBalls; i > 0  ; i--) {
+        for (int i = currentBalls; i > 0; i--) {
             shootingBalls.add(new ShootingBall(Integer.valueOf(i).toString()));
         }
     }
@@ -100,11 +103,11 @@ public class Game {
     }
 
     private CentralBall makeFirstCentralBall(CentralBall centralBall) {
-        return new CentralBall(centralBall.getCenterX(),centralBall.getCenterY(),centralBall.getRadius()/3);
+        return new CentralBall(centralBall.getCenterX(), centralBall.getCenterY(), centralBall.getRadius() / 3);
     }
 
     public void shoot() {
-        currentBalls --;
+        currentBalls--;
         shootingBalls.remove(0);
     }
 

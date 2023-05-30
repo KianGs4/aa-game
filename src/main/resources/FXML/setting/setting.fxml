@@ -27,7 +27,7 @@
                   <FontAwesomeIcon fill="WHITE" glyphName="GEARS" size="20" />
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="186.0" text="Maps">
+            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="186.0" text="Maps" onMouseClicked="#openMapSetting">
                <graphic>
                   <FontAwesomeIcon fill="WHITE" size="20" />
                </graphic>
