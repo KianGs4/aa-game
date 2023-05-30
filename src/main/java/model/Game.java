@@ -48,7 +48,7 @@ public class Game {
         }
     }
 
-    private void getConstants() {
+    public void getConstants() {
         switch (GameSetting.getDifficulty()) {
             case "Easy":
                 rotateSpeed = 2.5;
@@ -129,5 +129,9 @@ public class Game {
 
     public void setPhase(Phase phase) {
         this.phase = phase;
+    }
+
+    public void setRotateSpeed(double rotateSpeed) {
+        this.rotateSpeed = rotateSpeed;
     }
 }
