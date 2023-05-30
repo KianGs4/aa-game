@@ -67,6 +67,10 @@ public class GameMenu extends Application {
         pane.getChildren().add(game.getFirstCentralBall());
         pane.getChildren().add(game.getSecondCentralBall());
         pane.getStylesheets().add(Main.class.getResource("/CSS/style1.css").toString());
+        game.createSampleBalls(game.getSecondCentralBall(),pane);
+        for (ShootingBall shootingBall: game.getSecondCentralBall().getBalls())
+            rotateInPhase1(shootingBall);
+
         Scene scene = new Scene(pane);
         stage.setScene(scene);
         setGameTime();

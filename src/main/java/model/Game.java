@@ -1,6 +1,7 @@
 package model;
 
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 
@@ -30,6 +31,18 @@ public class Game {
         firstCentralBall = makeFirstCentralBall(secondCentralBall);
         createBalls(numberOfBalls);
         getConstnats();
+    }
+
+    public void createSampleBalls(CentralBall secondCentralBall, Pane pane) {
+        for (int i = 0; i <= 360 ; i+=GameSetting.getMap().getAngle()) {
+            ShootingBall shootingBall = new ShootingBall("");
+            shootingBall.getBall().setCenterX(Math.cos(i*GameSetting.getMap().getAngle())*secondCentralBall.getRadius() + secondCentralBall.getCenterX() );
+            shootingBall.getBall().setCenterY(Math.sin(i*GameSetting.getMap().getAngle())*secondCentralBall.getRadius() + secondCentralBall.getCenterY());
+            pane.getChildren().add(shootingBall.getBall());
+            shootingBall.makeLine(secondCentralBall,pane);
+            secondCentralBall.getBalls().add(shootingBall);
+            if (GameSetting.getMap().equals(GameMap.MAP1)) i*=2;
+        }
     }
 
     private void getConstnats() {

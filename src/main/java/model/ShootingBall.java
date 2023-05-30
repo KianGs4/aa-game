@@ -10,9 +10,9 @@ import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextBoundsType;
 
 public class ShootingBall extends StackPane {
-    Circle ball;
-    Line line;
-    Text text;
+    private final Circle ball;
+    private Line line;
+    private Text text;
 
     public ShootingBall(String text) {
         ball = new Circle((double) 850 / 2, 646, 14);
@@ -24,6 +24,7 @@ public class ShootingBall extends StackPane {
     private void initialiseText(String text) {
         this.text = new Text(text);
         this.text.setY(ball.getCenterY() + ball.getRadius()/3 );
+        if (text.equals("")) return;
 
         if (Integer.parseInt(text) < 10 ) {
             this.text.setX(ball.getCenterX() - ball.getRadius()/3);

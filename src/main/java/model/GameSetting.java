@@ -12,6 +12,7 @@ public class GameSetting {
     private static boolean sound;
     private static KeyCode shootKey;
     private static KeyCode frozenKey;
+    private static GameMap map;
 
 
     static {
@@ -22,6 +23,7 @@ public class GameSetting {
         sound = true;
         shootKey = KeyCode.SPACE;
         frozenKey = KeyCode.TAB;
+        map = GameMap.MAP3;
     }
 
 
@@ -53,6 +55,10 @@ public class GameSetting {
         return sound;
     }
 
+    public static GameMap getMap() {
+        return map;
+    }
+
     public static void setDifficulty(String difficulty) {
         GameSetting.difficulty = difficulty;
     }
@@ -75,6 +81,10 @@ public class GameSetting {
 
     public static void setNumberOfBalls(int numberOfBalls) {
         GameSetting.numberOfBalls = numberOfBalls;
+    }
+
+    public static void setMap(GameMap map) {
+        GameSetting.map = map;
     }
 
     public static void setSound(Boolean sound) {
