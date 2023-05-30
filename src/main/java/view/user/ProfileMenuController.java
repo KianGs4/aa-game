@@ -5,16 +5,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import model.DataBase;
 import model.User;
 import view.Main;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -23,6 +27,8 @@ public class ProfileMenuController implements Initializable {
     public Text defText;
     public TextField changeBox;
     public Text message;
+    
+    public AnchorPane pane;
     private Alert alert;
     private DialogPane dialog;
 
@@ -36,7 +42,10 @@ public class ProfileMenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         User currentUser = PrimaryMenuController.currentUser;
-        URL avatar = ProfileMenuController.class.getResource(currentUser.getAvatar());
+        String avatar;
+        if (currentUser.getAvatar().matches("/Images.+"))
+             avatar = ProfileMenuController.class.getResource(currentUser.getAvatar()).toString();
+        else avatar = currentUser.getAvatar();
         Image img = new Image(avatar.toString());
         circle.setFill(new ImagePattern(img));
         username.setText(currentUser.getUsername());
@@ -44,6 +53,34 @@ public class ProfileMenuController implements Initializable {
         defText.setText("");
         message.setText("");
         changeBox.setVisible(false);
+        initializeDefaultAvatars();
+    }
+
+    private void initializeDefaultAvatars() {
+        for (int i = 0; i <= 5; i++) {
+            createDefaultAvatar(i);
+        }
+    }
+
+    private void createDefaultAvatar(int counter) {
+        ImageView output = new ImageView();
+        output.setImage(new Image(ProfileMenu.class.getResource("/Images/AVATARS/avatar" + counter + ".png").toExternalForm()));
+        output.setFitWidth(87);
+        output.setFitHeight(72);
+        pane.getChildren().add(output);
+        setImagePlace(output,counter);
+        output.setOnMouseClicked(mouseEvent -> {
+            PrimaryMenuController.currentUser.setAvatar(output.getImage().getUrl().toString());
+            Image img = new Image(PrimaryMenuController.currentUser.getAvatar());
+            circle.setFill(new ImagePattern(img));
+            DataBase.getInstance().updateData();
+        });
+    }
+
+    private void setImagePlace(ImageView output, int counter) {
+        if (counter % 2 == 0) output.setTranslateX(572);
+        else output.setTranslateX(669);
+        output.setTranslateY(163 +  Math.floor( (double) counter/2) * 100 );
     }
 
     public void changeUsername() {
@@ -127,5 +164,20 @@ public class ProfileMenuController implements Initializable {
 
     public void goToPrimaryMenu(MouseEvent mouseEvent) throws Exception {
         new PrimaryMenu().start(Main.stage);
+    }
+
+    public void selectPic(MouseEvent mouseEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("jpg file", "*.jpg")
+                , new FileChooser.ExtensionFilter("jpeg file", "*.jpeg")
+                , new FileChooser.ExtensionFilter("png file", "*.png")
+        );
+        File selectedPic = fileChooser.showOpenDialog(Main.stage);
+        if (selectedPic == null) return;
+        PrimaryMenuController.currentUser.setAvatar(selectedPic.getPath().toString());
+        Image img = new Image(PrimaryMenuController.currentUser.getAvatar());
+        circle.setFill(new ImagePattern(img));
+        DataBase.getInstance().updateData();
     }
 }

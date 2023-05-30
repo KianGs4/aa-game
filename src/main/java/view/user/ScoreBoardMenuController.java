@@ -36,9 +36,11 @@ public class ScoreBoardMenuController implements Initializable {
         User currentUser = PrimaryMenuController.currentUser;
         username.setText(currentUser.getUsername());
         username.maxWidth(username.getText().length());
-        URL avatar = ProfileMenuController.class.getResource(currentUser.getAvatar());
-        assert avatar != null;
-        Image img = new Image(avatar.toString());
+        String avatar;
+        if (currentUser.getAvatar().matches("/Images.+"))
+            avatar = ProfileMenuController.class.getResource(currentUser.getAvatar()).toString();
+        else avatar = currentUser.getAvatar();
+        Image img = new Image(avatar);
         circle_currentUser.setFill(new ImagePattern(img));
         username.setText(currentUser.getUsername());
         userPoint.setText(Integer.valueOf(currentUser.getHighScore()).toString());

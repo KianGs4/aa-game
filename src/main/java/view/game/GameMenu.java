@@ -46,6 +46,7 @@ public class GameMenu extends Application {
         if (time.getSecondsLeft() > 120) {
             try {
                 hasContinue = false;
+                System.out.println("condition 0");
                 endGameSituation();
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
@@ -108,10 +109,16 @@ public class GameMenu extends Application {
                         shootAction();
                     } else {
                         try {
+                            System.out.println("condition1");
                             endGameSituation();
                         } catch (Exception e) {
                             throw new RuntimeException(e);
                         }
+                    }
+                }
+                if (keyEvent.getCode().equals(game.getFreeze())) {
+                    for (Timeline timeline : rotations) {
+                        //    timeline.getKeyFrames().
                     }
                 }
                 if (game.getPhase().equals(Phase.PHASE_4) && keyEvent.getCode().equals(KeyCode.LEFT))
@@ -158,9 +165,9 @@ public class GameMenu extends Application {
         if (!hasContinue) stopRotations();
         if (game.getCurrentBalls() >= 2) createBall(game.getShootingBalls().get(1));
         if (game.getCurrentBalls() >= 1) game.getShootingBalls().get(0).moveToShoot();
+        updateSituation();
         scoreInView.setText(Integer.valueOf(currentScore).toString());
         checkPhaseSituation();
-        updateSituation();
     }
 
     private void updateSituation() {
@@ -201,20 +208,17 @@ public class GameMenu extends Application {
                 }
                 break;
             case PHASE_2:
-                new PassingTimeAnimation(this, game.getSecondCentralBall(), 6).play();
                 if (2 * game.getCurrentBalls() < game.getNumberOfBalls()) {
                     game.setPhase(Phase.PHASE_3);
                     changePhase(game.getPhase());
                 }
                 break;
             case PHASE_3:
-                new PassingTimeAnimation(this, game.getSecondCentralBall(), 6).play();
                 if (4 * game.getCurrentBalls() < game.getNumberOfBalls()) {
                     game.setPhase(Phase.PHASE_4);
                 }
                 break;
             case PHASE_4:
-                new PassingTimeAnimation(this, game.getSecondCentralBall(), 6).play();
                 break;
         }
     }
@@ -264,12 +268,13 @@ public class GameMenu extends Application {
         Timeline circleRotationPhase1TimeLine = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(circleRotationPhase1.angleProperty(), 0)),
                 new KeyFrame(Duration.seconds(game.getRotateSpeed()), new KeyValue(circleRotationPhase1.angleProperty(), 360)),
-                new KeyFrame(Duration.ZERO, actionEvent -> {
+                new KeyFrame(Duration.seconds(0), actionEvent -> {
                     for (ShootingBall shootingBallSelected : game.getSecondCentralBall().getBalls()) {
                         if (shootingBallSelected.equals(shootingBall)) continue;
                         if (shootingBallSelected.getBall().getBoundsInParent().intersects(shootingBall.getBall().getBoundsInParent())) {
                             hasContinue = false;
                             try {
+                                System.out.println("condition2");
                                 endGameSituation();
                             } catch (Exception e) {
                                 throw new RuntimeException(e);
@@ -280,6 +285,7 @@ public class GameMenu extends Application {
                     }
                 })
         );
+
         runTimeLine(circleRotationPhase1TimeLine);
     }
 
@@ -288,9 +294,7 @@ public class GameMenu extends Application {
         circleRotationPhase2.setPivotX(game.getSecondCentralBall().getCenterX());
         circleRotationPhase2.setPivotY(game.getSecondCentralBall().getCenterY());
         addRotation(shootingBall, circleRotationPhase2);
-        Timeline circleRotationPhase2TimeLine = (isClockWise) ?
-                createClockWisePhase2TimeLine(shootingBall, circleRotationPhase2) :
-                createCounterClockWisePhase2TimeLine(shootingBall, circleRotationPhase2);
+        Timeline circleRotationPhase2TimeLine = createClockWisePhase2TimeLine(shootingBall, circleRotationPhase2);
         runTimeLine(circleRotationPhase2TimeLine);
     }
 
@@ -300,12 +304,13 @@ public class GameMenu extends Application {
         return new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(circleRotationPhase2.angleProperty(), angle)),
                 new KeyFrame(Duration.seconds(6), new KeyValue(circleRotationPhase2.angleProperty(), 380 * (6 / game.getRotateSpeed()) + angle)),
-                new KeyFrame(Duration.ZERO, actionEvent -> {
+                new KeyFrame(Duration.seconds(0), actionEvent -> {
                     for (ShootingBall shootingBallSelected : game.getSecondCentralBall().getBalls()) {
                         if (shootingBallSelected.equals(shootingBall)) continue;
                         if (shootingBallSelected.getBall().getBoundsInParent().intersects(shootingBall.getBall().getBoundsInParent())) {
                             hasContinue = false;
                             try {
+                                System.out.println("condition 4");
                                 endGameSituation();
                             } catch (Exception e) {
                                 throw new RuntimeException(e);
@@ -321,28 +326,6 @@ public class GameMenu extends Application {
         double distance_x = ball.getCenterX() - ball2.getCenterX();
         double distance_y = ball.getCenterY() - ball2.getCenterY();
         return Math.asin(distance_x / (Math.sqrt(distance_x * distance_x + distance_y * distance_y)));
-    }
-
-    private Timeline createCounterClockWisePhase2TimeLine(ShootingBall shootingBall, Rotate circleRotationPhase2) {
-        double angle = calculateAngle(shootingBall.getBall(), game.getSecondCentralBall());
-        return new Timeline(
-                new KeyFrame(Duration.ZERO, new KeyValue(circleRotationPhase2.angleProperty(), angle)),
-                new KeyFrame(Duration.seconds(6), new KeyValue(circleRotationPhase2.angleProperty(), -1 * (380 * (6 / game.getRotateSpeed())) + angle)),
-                new KeyFrame(Duration.ZERO, actionEvent -> {
-                    for (ShootingBall shootingBallSelected : game.getSecondCentralBall().getBalls()) {
-                        if (shootingBallSelected.equals(shootingBall)) continue;
-                        if (shootingBallSelected.getBall().getBoundsInParent().intersects(shootingBall.getBall().getBoundsInParent())) {
-                            hasContinue = false;
-                            try {
-                                endGameSituation();
-                            } catch (Exception e) {
-                                throw new RuntimeException(e);
-                            }
-                            return;
-                        }
-                    }
-                })
-        );
     }
 
 
